@@ -24,4 +24,4 @@ spec:
       type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions:
-      - { key: gitops, operator: In, values: ["true"] }
+      - { key: gitops, operator: Exists, values: [] }
