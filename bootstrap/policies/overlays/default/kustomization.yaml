@@ -4,3 +4,4 @@ resources:
 - namespace.yaml
 - ../../../../components/policies/gitops/base
 - ../../../../components/policies/kyverno/base
+- ../../../../components/policies/compliance/overlays/scan-nist-800-53
