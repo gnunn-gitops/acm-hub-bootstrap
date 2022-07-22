@@ -26,12 +26,12 @@ spec:
           remediationAction: inform # will be overridden by remediationAction in parent policy
           severity: low
           namespaceSelector:
-            exclude: ["kube-*","openshift-*"]
+            exclude: ["kube-*","openshift-*","default","open-cluster-management-*"]
             include: ["*"]
           object-templates:
             - complianceType: musthave
               objectDefinition:
-                apiVersion: wgpolicyk8s.io/v1alpha1
+                apiVersion: wgpolicyk8s.io/v1alpha2
                 kind: PolicyReport
                 summary:
                   fail: 0
@@ -46,7 +46,7 @@ spec:
           object-templates:
             - complianceType: musthave
               objectDefinition:
-                apiVersion: wgpolicyk8s.io/v1alpha1
+                apiVersion: wgpolicyk8s.io/v1alpha2
                 kind: ClusterPolicyReport
                 summary:
                   fail: 0
@@ -74,4 +74,4 @@ spec:
     type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions:
-      - {key: policy, operator: In, values: ["kyverno"]}
+      []

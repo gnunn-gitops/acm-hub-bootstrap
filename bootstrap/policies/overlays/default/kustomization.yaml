@@ -3,3 +3,4 @@ namespace: acm-policies
 resources:
 - namespace.yaml
 - ../../../../components/policies/gitops/base
+- ../../../../components/policies/kyverno/base
