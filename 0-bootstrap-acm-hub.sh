@@ -1,0 +1,1 @@
+kustomize build bootstrap/hub/overlays/default | oc apply -f -

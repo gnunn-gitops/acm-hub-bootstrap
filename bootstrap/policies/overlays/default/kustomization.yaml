@@ -1,0 +1,4 @@
+namespace: acm-policies
+
+resources:
+- ../../../../components/policies/gitops/base

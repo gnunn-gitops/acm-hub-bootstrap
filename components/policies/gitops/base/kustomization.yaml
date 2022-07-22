@@ -1,0 +1,6 @@
+namespace: open-cluster-management-policies
+
+resources:
+- managed-gitops-operator.yaml
+- sealed-secrets-seed.yaml
+- placement.yaml
