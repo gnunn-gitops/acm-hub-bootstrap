@@ -1,3 +1,2 @@
 resources:
 - operator-policy.yaml
-- check-result-policy.yaml
