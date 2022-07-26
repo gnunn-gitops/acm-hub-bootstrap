@@ -1,0 +1,3 @@
+resources:
+- multiclusterobservability,yaml
+- thanos-object-storage.yaml
