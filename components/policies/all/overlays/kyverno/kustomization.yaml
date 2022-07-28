@@ -1,5 +1,5 @@
 namespace: acm-policies
 
-resources:
+bases:
 - ../common
 - ../../../kyverno/base
