@@ -1,0 +1,7 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: acm-policies
+spec:
+  type: GitHub
+  pathname: https://github.com/gnunn-gitops/acm-hub-bootstrap.git

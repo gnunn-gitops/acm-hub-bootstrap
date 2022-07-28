@@ -1,0 +1,8 @@
+namespace: acm-policies
+
+resources:
+- namespace.yaml
+- channel.yaml
+- application.yaml
+- subscription.yaml
+- placementrule.yaml

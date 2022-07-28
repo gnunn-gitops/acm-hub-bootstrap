@@ -1,5 +1,4 @@
-namespace: acm-gitops-policy
+namespace: acm-policies
 
 resources:
-- namespace.yaml
-- ../../../../components/policies/gitops/base
+- ../../../../components/apps/policies/base

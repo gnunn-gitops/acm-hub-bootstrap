@@ -1,0 +1,10 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  labels:
+    app: petclinic
+  name: petclinic
+spec:
+  clusterSelector:
+    matchLabels:
+      name: local-cluster
