@@ -1,5 +1,7 @@
 namespace: acm-policies
 
 bases:
-- ../common
+- ../../../gitops/base
+- ../../../cert-expiration/base
+- ../../../compliance/overlays/scan-nist-800-53
 - ../../../kyverno/base
