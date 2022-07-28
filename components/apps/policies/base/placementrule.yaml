@@ -2,8 +2,8 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   labels:
-    app: petclinic
-  name: petclinic
+    app: acm-policies
+  name: acm-policies
 spec:
   clusterSelector:
     matchLabels:
