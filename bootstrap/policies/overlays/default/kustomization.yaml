@@ -3,6 +3,3 @@ namespace: acm-policies
 resources:
 - namespace.yaml
 - ../../../../components/policies/gitops/base
-- ../../../../components/policies/kyverno/base
-- ../../../../components/policies/compliance/overlays/scan-nist-800-53
-- ../../../../components/policies/cert-expiration/base
