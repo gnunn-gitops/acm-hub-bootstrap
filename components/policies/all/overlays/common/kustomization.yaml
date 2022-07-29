@@ -1,9 +1,9 @@
 namespace: acm-policies
 
 bases:
-- ../../../gitops/base
+# - ../../../gitops/base
 - ../../../cert-expiration/base
-- ../../../compliance/overlays/scan-nist-800-53
+# - ../../../compliance/overlays/scan-nist-800-53
 
 resources:
 - namespace.yaml

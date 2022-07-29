@@ -5,7 +5,7 @@ metadata:
   labels:
     app: acm-policies
   annotations:
-    apps.open-cluster-management.io/github-path: components/policies/all/overlays/kyverno
+    apps.open-cluster-management.io/github-path: components/policies/all/overlays/common
     apps.open-cluster-management.io/github-branch: main
 spec:
   channel: acm-policies/acm-policies
