@@ -1,4 +1,6 @@
 namespace: acm-policies
 
 resources:
-- ../../../../components/apps/policies/base
+- namespace.yaml
+- ../../../../components/policies/all/overlays/kyverno
+#- ../../../../components/apps/policies/base

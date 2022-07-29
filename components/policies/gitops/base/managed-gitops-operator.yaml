@@ -53,11 +53,7 @@ spec:
                   name: openshift-gitops-operator
                   namespace: openshift-operators
                 spec:
-                  channel: stable
-                  config:
-                    env:
-                      - name: DISABLE_DEX
-                        value: 'false'
+                  channel: latest
                   installPlanApproval: Automatic
                   name: openshift-gitops-operator
                   source: redhat-operators
