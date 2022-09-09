@@ -1,2 +1,2 @@
 resources:
-- operator-policy.yaml
+- scan-nist-800-53-policy.yaml

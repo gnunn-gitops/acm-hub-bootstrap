@@ -2,5 +2,5 @@ namespace: acm-policies
 
 resources:
 - namespace.yaml
-- ../../../../components/policies/all/overlays/kyverno
-#- ../../../../components/apps/policies/base
+- ../../../../components/policies/compliance/base
+- ../../../../components/policies/cert-expiration/base
