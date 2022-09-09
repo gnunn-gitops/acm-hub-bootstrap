@@ -1,3 +1,2 @@
 resources:
-- ../../../../components/apps/acm/overlays/secrets
 - ../../../../components/apps/acm/overlays/hub
