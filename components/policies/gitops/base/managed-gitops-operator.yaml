@@ -182,6 +182,7 @@ spec:
                   sso:
                     dex:
                       openShiftOAuth: true
+                    provider: dex
                   notifications:
                     enabled: true                                              
                   resourceCustomizations: |
