@@ -89,6 +89,14 @@ spec:
             - complianceType: musthave
               objectDefinition:
                 apiVersion: v1
+                kind: ConfigMap
+                metadata:
+                  labels:
+                    app.kubernetes.io/managed-by: openshift-gitops
+                    app.kubernetes.io/name: argocd-notifications-cm
+                    app.kubernetes.io/part-of: argocd
+                  name: argocd-notifications-cm
+                  namespace: openshift-gitops                
                 data:
                   service.slack: |
                     token: $slack-token
@@ -621,11 +629,3 @@ spec:
                       send:
                       - app-sync-succeeded
                       when: app.status.operationState.phase in ['Succeeded']
-                kind: ConfigMap
-                metadata:
-                  labels:
-                    app.kubernetes.io/managed-by: openshift-gitops
-                    app.kubernetes.io/name: argocd-notifications-cm
-                    app.kubernetes.io/part-of: argocd
-                  name: argocd-notifications-cm
-                  namespace: openshift-gitops
