@@ -1,0 +1,631 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-managed-gitops-notifications-config
+  annotations:
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-argocd-notifications-secret-label-existing
+        spec:
+          remediationAction: enforce
+          severity: low
+          namespaceSelector:
+            exclude:
+              - kube-*
+            include:
+              - default
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1
+                kind: Secret
+                metadata:
+                  labels:
+                    app.kubernetes.io/managed-by: openshift-gitops
+                    app.kubernetes.io/name: argocd-notifications-secret
+                    app.kubernetes.io/part-of: argocd
+                  annotations:
+                    sealedsecrets.bitnami.com/managed: "true"
+                  name: argocd-notifications-secret
+                  namespace: openshift-gitops
+                type: Opaque
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-argocd-notifications-secret
+        spec:
+          remediationAction: enforce
+          severity: low
+          namespaceSelector:
+            exclude:
+              - kube-*
+            include:
+              - default
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: bitnami.com/v1alpha1
+                kind: SealedSecret
+                metadata:
+                  name: argocd-notifications-secret
+                  namespace: openshift-gitops
+                spec:
+                  encryptedData:
+                    slack-token: AgBNGlGy3XgTTaAJStnI/PBo8HnSityrgr+qRNNqiKCq4+RxFYmaaePInSnInfmyqN+Luv0OSVfsJJVfCPncSAzjZtWKTm1Ph44aIrbich94SHM4+MBqUZL2yluCBBYh9WlYVEw0+6iZyQttBt4OvXmibbA3AXWS26/rH/h/V2+GUvQ7UHmLT3rjZmuiHGr8fydq7LqXn27RAj72H5PfGf/+4c53MyMspYHFQchhbnQL25MYnujPmXQQgV42EF2JJfLVqkncOl522sXjF5DgqGDnR0AYbsA1Q70xIUB9qc1AnHY0YrW9gVO1VU1UpgKP0+kIgV/IGnSvBDD4eSFRjmy+ul4TZcVVbg2i1QL2nPDv6htiFU5P4zt2VbjmKTc5KqPKzt5jnG49MLGqrmAEQnKUCOo4Iglz3/LGuKevMOh3xqgVVFa2QIUdlwvmsHwDeF9aDsgJhtz9BATQB0nbhqRSACg9X+uqYEO2b8KVtL5Fq1Km+S0kJ2dly2Qpr+/OyZd9bB+7scjIV825Qb9q3Yj5P26VSSFFTjyYnxpvwZZj3XYT5Dz5/zIkklbhTnqAvCROxPizvm0+K8wPzUOLmvuO1K80k5AKgtP2Yaez3TOaaSHNTKAFJX+I7iJxC6iP/yN45IcFjhivILTS16EqJPBGkqsxukKDcVlpGMOmJrR1QygueVXj8CPdv3BFKsu7+aNRAoiRBd3u3qCBzNq9QexLcPEdv/GgdQlrPxi9HpIU9DPRMMTzJiZVO3ykEXT/ubwVUBjCiSyBDeg=
+                  template:
+                    metadata:
+                      name: argocd-notifications-secret
+                      namespace: openshift-gitops
+                      labels:
+                        app.kubernetes.io/managed-by: openshift-gitops
+                        app.kubernetes.io/name: argocd-notifications-secret
+                        app.kubernetes.io/part-of: argocd
+                      annotations:
+                        sealedsecrets.bitnami.com/managed: "true"
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-managed-argocd-notifications-cm
+        spec:
+          remediationAction: enforce
+          severity: low
+          namespaceSelector:
+            exclude:
+              - kube-*
+            include:
+              - default
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1
+                data:
+                  service.slack: |
+                    token: $slack-token
+                  template.app-created: |-
+                    email:
+                      subject: Application {{.app.metadata.name}} has been created.
+                    message: Application {{.app.metadata.name}} has been created.
+                    teams:
+                      title: Application {{.app.metadata.name}} has been created.
+                  template.app-deleted: |-
+                    email:
+                      subject: Application {{.app.metadata.name}} has been deleted.
+                    message: Application {{.app.metadata.name}} has been deleted.
+                    teams:
+                      title: Application {{.app.metadata.name}} has been deleted.
+                  template.app-deployed: |-
+                    email:
+                      subject: New version of an application {{.app.metadata.name}} is up and running.
+                    message: |
+                      {{if eq .serviceType "slack"}}:white_check_mark:{{end}} Application {{.app.metadata.name}} is now running new version of deployments manifests.
+                    slack:
+                      attachments: |
+                        [{
+                          "title": "{{ .app.metadata.name}}",
+                          "title_link":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+                          "color": "#18be52",
+                          "fields": [
+                          {
+                            "title": "Sync Status",
+                            "value": "{{.app.status.sync.status}}",
+                            "short": true
+                          },
+                          {
+                            "title": "Repository",
+                            "value": "{{.app.spec.source.repoURL}}",
+                            "short": true
+                          },
+                          {
+                            "title": "Revision",
+                            "value": "{{.app.status.sync.revision}}",
+                            "short": true
+                          }
+                          {{range $index, $c := .app.status.conditions}}
+                          {{if not $index}},{{end}}
+                          {{if $index}},{{end}}
+                          {
+                            "title": "{{$c.type}}",
+                            "value": "{{$c.message}}",
+                            "short": true
+                          }
+                          {{end}}
+                          ]
+                        }]
+                      deliveryPolicy: Post
+                      groupingKey: ""
+                      notifyBroadcast: false
+                    teams:
+                      facts: |
+                        [{
+                          "name": "Sync Status",
+                          "value": "{{.app.status.sync.status}}"
+                        },
+                        {
+                          "name": "Repository",
+                          "value": "{{.app.spec.source.repoURL}}"
+                        },
+                        {
+                          "name": "Revision",
+                          "value": "{{.app.status.sync.revision}}"
+                        }
+                        {{range $index, $c := .app.status.conditions}}
+                          {{if not $index}},{{end}}
+                          {{if $index}},{{end}}
+                          {
+                            "name": "{{$c.type}}",
+                            "value": "{{$c.message}}"
+                          }
+                        {{end}}
+                        ]
+                      potentialAction: |-
+                        [{
+                          "@type":"OpenUri",
+                          "name":"Operation Application",
+                          "targets":[{
+                            "os":"default",
+                            "uri":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}"
+                          }]
+                        },
+                        {
+                          "@type":"OpenUri",
+                          "name":"Open Repository",
+                          "targets":[{
+                            "os":"default",
+                            "uri":"{{.app.spec.source.repoURL | call .repo.RepoURLToHTTPS}}"
+                          }]
+                        }]
+                      themeColor: '#000080'
+                      title: New version of an application {{.app.metadata.name}} is up and running.
+                  template.app-health-degraded: |-
+                    email:
+                      subject: Application {{.app.metadata.name}} has degraded.
+                    message: |
+                      {{if eq .serviceType "slack"}}:exclamation:{{end}} Application {{.app.metadata.name}} has degraded.
+                      Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.
+                    slack:
+                      attachments: |
+                        [{
+                          "title": "{{ .app.metadata.name}}",
+                          "title_link": "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+                          "color": "#f4c030",
+                          "fields": [
+                          {
+                            "title": "Health Status",
+                            "value": "{{.app.status.health.status}}",
+                            "short": true
+                          },
+                          {
+                            "title": "Repository",
+                            "value": "{{.app.spec.source.repoURL}}",
+                            "short": true
+                          }
+                          {{range $index, $c := .app.status.conditions}}
+                          {{if not $index}},{{end}}
+                          {{if $index}},{{end}}
+                          {
+                            "title": "{{$c.type}}",
+                            "value": "{{$c.message}}",
+                            "short": true
+                          }
+                          {{end}}
+                          ]
+                        }]
+                      deliveryPolicy: Post
+                      groupingKey: ""
+                      notifyBroadcast: false
+                    teams:
+                      facts: |
+                        [{
+                          "name": "Health Status",
+                          "value": "{{.app.status.health.status}}"
+                        },
+                        {
+                          "name": "Repository",
+                          "value": "{{.app.spec.source.repoURL}}"
+                        }
+                        {{range $index, $c := .app.status.conditions}}
+                          {{if not $index}},{{end}}
+                          {{if $index}},{{end}}
+                          {
+                            "name": "{{$c.type}}",
+                            "value": "{{$c.message}}"
+                          }
+                        {{end}}
+                        ]
+                      potentialAction: |
+                        [{
+                          "@type":"OpenUri",
+                          "name":"Open Application",
+                          "targets":[{
+                            "os":"default",
+                            "uri":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}"
+                          }]
+                        },
+                        {
+                          "@type":"OpenUri",
+                          "name":"Open Repository",
+                          "targets":[{
+                            "os":"default",
+                            "uri":"{{.app.spec.source.repoURL | call .repo.RepoURLToHTTPS}}"
+                          }]
+                        }]
+                      themeColor: '#FF0000'
+                      title: Application {{.app.metadata.name}} has degraded.
+                  template.app-sync-failed: |-
+                    email:
+                      subject: Failed to sync application {{.app.metadata.name}}.
+                    message: |
+                      {{if eq .serviceType "slack"}}:exclamation:{{end}}  The sync operation of application {{.app.metadata.name}} has failed at {{.app.status.operationState.finishedAt}} with the following error: {{.app.status.operationState.message}}
+                      Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
+                    slack:
+                      attachments: |
+                        [{
+                          "title": "{{ .app.metadata.name}}",
+                          "title_link":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+                          "color": "#E96D76",
+                          "fields": [
+                          {
+                            "title": "Sync Status",
+                            "value": "{{.app.status.sync.status}}",
+                            "short": true
+                          },
+                          {
+                            "title": "Repository",
+                            "value": "{{.app.spec.source.repoURL}}",
+                            "short": true
+                          }
+                          {{range $index, $c := .app.status.conditions}}
+                          {{if not $index}},{{end}}
+                          {{if $index}},{{end}}
+                          {
+                            "title": "{{$c.type}}",
+                            "value": "{{$c.message}}",
+                            "short": true
+                          }
+                          {{end}}
+                          ]
+                        }]
+                      deliveryPolicy: Post
+                      groupingKey: ""
+                      notifyBroadcast: false
+                    teams:
+                      facts: |
+                        [{
+                          "name": "Sync Status",
+                          "value": "{{.app.status.sync.status}}"
+                        },
+                        {
+                          "name": "Failed at",
+                          "value": "{{.app.status.operationState.finishedAt}}"
+                        },
+                        {
+                          "name": "Repository",
+                          "value": "{{.app.spec.source.repoURL}}"
+                        }
+                        {{range $index, $c := .app.status.conditions}}
+                          {{if not $index}},{{end}}
+                          {{if $index}},{{end}}
+                          {
+                            "name": "{{$c.type}}",
+                            "value": "{{$c.message}}"
+                          }
+                        {{end}}
+                        ]
+                      potentialAction: |-
+                        [{
+                          "@type":"OpenUri",
+                          "name":"Open Operation",
+                          "targets":[{
+                            "os":"default",
+                            "uri":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true"
+                          }]
+                        },
+                        {
+                          "@type":"OpenUri",
+                          "name":"Open Repository",
+                          "targets":[{
+                            "os":"default",
+                            "uri":"{{.app.spec.source.repoURL | call .repo.RepoURLToHTTPS}}"
+                          }]
+                        }]
+                      themeColor: '#FF0000'
+                      title: Failed to sync application {{.app.metadata.name}}.
+                  template.app-sync-running: |-
+                    email:
+                      subject: Start syncing application {{.app.metadata.name}}.
+                    message: |
+                      The sync operation of application {{.app.metadata.name}} has started at {{.app.status.operationState.startedAt}}.
+                      Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
+                    slack:
+                      attachments: |
+                        [{
+                          "title": "{{ .app.metadata.name}}",
+                          "title_link":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+                          "color": "#0DADEA",
+                          "fields": [
+                          {
+                            "title": "Sync Status",
+                            "value": "{{.app.status.sync.status}}",
+                            "short": true
+                          },
+                          {
+                            "title": "Repository",
+                            "value": "{{.app.spec.source.repoURL}}",
+                            "short": true
+                          }
+                          {{range $index, $c := .app.status.conditions}}
+                          {{if not $index}},{{end}}
+                          {{if $index}},{{end}}
+                          {
+                            "title": "{{$c.type}}",
+                            "value": "{{$c.message}}",
+                            "short": true
+                          }
+                          {{end}}
+                          ]
+                        }]
+                      deliveryPolicy: Post
+                      groupingKey: ""
+                      notifyBroadcast: false
+                    teams:
+                      facts: |
+                        [{
+                          "name": "Sync Status",
+                          "value": "{{.app.status.sync.status}}"
+                        },
+                        {
+                          "name": "Started at",
+                          "value": "{{.app.status.operationState.startedAt}}"
+                        },
+                        {
+                          "name": "Repository",
+                          "value": "{{.app.spec.source.repoURL}}"
+                        }
+                        {{range $index, $c := .app.status.conditions}}
+                          {{if not $index}},{{end}}
+                          {{if $index}},{{end}}
+                          {
+                            "name": "{{$c.type}}",
+                            "value": "{{$c.message}}"
+                          }
+                        {{end}}
+                        ]
+                      potentialAction: |-
+                        [{
+                          "@type":"OpenUri",
+                          "name":"Open Operation",
+                          "targets":[{
+                            "os":"default",
+                            "uri":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true"
+                          }]
+                        },
+                        {
+                          "@type":"OpenUri",
+                          "name":"Open Repository",
+                          "targets":[{
+                            "os":"default",
+                            "uri":"{{.app.spec.source.repoURL | call .repo.RepoURLToHTTPS}}"
+                          }]
+                        }]
+                      title: Start syncing application {{.app.metadata.name}}.
+                  template.app-sync-status-unknown: |-
+                    email:
+                      subject: Application {{.app.metadata.name}} sync status is 'Unknown'
+                    message: |
+                      {{if eq .serviceType "slack"}}:exclamation:{{end}} Application {{.app.metadata.name}} sync is 'Unknown'.
+                      Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.
+                      {{if ne .serviceType "slack"}}
+                      {{range $c := .app.status.conditions}}
+                          * {{$c.message}}
+                      {{end}}
+                      {{end}}
+                    slack:
+                      attachments: |
+                        [{
+                          "title": "{{ .app.metadata.name}}",
+                          "title_link":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+                          "color": "#E96D76",
+                          "fields": [
+                          {
+                            "title": "Sync Status",
+                            "value": "{{.app.status.sync.status}}",
+                            "short": true
+                          },
+                          {
+                            "title": "Repository",
+                            "value": "{{.app.spec.source.repoURL}}",
+                            "short": true
+                          }
+                          {{range $index, $c := .app.status.conditions}}
+                          {{if not $index}},{{end}}
+                          {{if $index}},{{end}}
+                          {
+                            "title": "{{$c.type}}",
+                            "value": "{{$c.message}}",
+                            "short": true
+                          }
+                          {{end}}
+                          ]
+                        }]
+                      deliveryPolicy: Post
+                      groupingKey: ""
+                      notifyBroadcast: false
+                    teams:
+                      facts: |
+                        [{
+                          "name": "Sync Status",
+                          "value": "{{.app.status.sync.status}}"
+                        },
+                        {
+                          "name": "Repository",
+                          "value": "{{.app.spec.source.repoURL}}"
+                        }
+                        {{range $index, $c := .app.status.conditions}}
+                          {{if not $index}},{{end}}
+                          {{if $index}},{{end}}
+                          {
+                            "name": "{{$c.type}}",
+                            "value": "{{$c.message}}"
+                          }
+                        {{end}}
+                        ]
+                      potentialAction: |-
+                        [{
+                          "@type":"OpenUri",
+                          "name":"Open Application",
+                          "targets":[{
+                            "os":"default",
+                            "uri":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}"
+                          }]
+                        },
+                        {
+                          "@type":"OpenUri",
+                          "name":"Open Repository",
+                          "targets":[{
+                            "os":"default",
+                            "uri":"{{.app.spec.source.repoURL | call .repo.RepoURLToHTTPS}}"
+                          }]
+                        }]
+                      title: Application {{.app.metadata.name}} sync status is 'Unknown'
+                  template.app-sync-succeeded: |-
+                    email:
+                      subject: Application {{.app.metadata.name}} has been successfully synced.
+                    message: |
+                      {{if eq .serviceType "slack"}}:white_check_mark:{{end}} Application {{.app.metadata.name}} has been successfully synced at {{.app.status.operationState.finishedAt}}.
+                      Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
+                    slack:
+                      attachments: |
+                        [{
+                          "title": "{{ .app.metadata.name}}",
+                          "title_link":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+                          "color": "#18be52",
+                          "fields": [
+                          {
+                            "title": "Sync Status",
+                            "value": "{{.app.status.sync.status}}",
+                            "short": true
+                          },
+                          {
+                            "title": "Repository",
+                            "value": "{{.app.spec.source.repoURL}}",
+                            "short": true
+                          }
+                          {{range $index, $c := .app.status.conditions}}
+                          {{if not $index}},{{end}}
+                          {{if $index}},{{end}}
+                          {
+                            "title": "{{$c.type}}",
+                            "value": "{{$c.message}}",
+                            "short": true
+                          }
+                          {{end}}
+                          ]
+                        }]
+                      deliveryPolicy: Post
+                      groupingKey: ""
+                      notifyBroadcast: false
+                    teams:
+                      facts: |
+                        [{
+                          "name": "Sync Status",
+                          "value": "{{.app.status.sync.status}}"
+                        },
+                        {
+                          "name": "Synced at",
+                          "value": "{{.app.status.operationState.finishedAt}}"
+                        },
+                        {
+                          "name": "Repository",
+                          "value": "{{.app.spec.source.repoURL}}"
+                        }
+                        {{range $index, $c := .app.status.conditions}}
+                          {{if not $index}},{{end}}
+                          {{if $index}},{{end}}
+                          {
+                            "name": "{{$c.type}}",
+                            "value": "{{$c.message}}"
+                          }
+                        {{end}}
+                        ]
+                      potentialAction: |-
+                        [{
+                          "@type":"OpenUri",
+                          "name":"Operation Details",
+                          "targets":[{
+                            "os":"default",
+                            "uri":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true"
+                          }]
+                        },
+                        {
+                          "@type":"OpenUri",
+                          "name":"Open Repository",
+                          "targets":[{
+                            "os":"default",
+                            "uri":"{{.app.spec.source.repoURL | call .repo.RepoURLToHTTPS}}"
+                          }]
+                        }]
+                      themeColor: '#000080'
+                      title: Application {{.app.metadata.name}} has been successfully synced
+                  trigger.on-created: |-
+                    - description: Application is created.
+                      oncePer: app.metadata.name
+                      send:
+                      - app-created
+                      when: "true"
+                  trigger.on-deleted: |-
+                    - description: Application is deleted.
+                      oncePer: app.metadata.name
+                      send:
+                      - app-deleted
+                      when: app.metadata.deletionTimestamp != nil
+                  trigger.on-deployed: |-
+                    - description: Application is synced and healthy. Triggered once per commit.
+                      oncePer: app.status.operationState.syncResult.revision
+                      send:
+                      - app-deployed
+                      when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status
+                          == 'Healthy'
+                  trigger.on-health-degraded: |-
+                    - description: Application has degraded
+                      send:
+                      - app-health-degraded
+                      when: app.status.health.status == 'Degraded'
+                  trigger.on-sync-failed: |-
+                    - description: Application syncing has failed
+                      send:
+                      - app-sync-failed
+                      when: app.status.operationState.phase in ['Error', 'Failed']
+                  trigger.on-sync-running: |-
+                    - description: Application is being synced
+                      send:
+                      - app-sync-running
+                      when: app.status.operationState.phase in ['Running']
+                  trigger.on-sync-status-unknown: |-
+                    - description: Application status is 'Unknown'
+                      end:
+                      - app-sync-status-unknown
+                      when: app.status.sync.status == 'Unknown'
+                  trigger.on-sync-succeeded: |-
+                    - description: Application syncing has succeeded
+                      send:
+                      - app-sync-succeeded
+                      when: app.status.operationState.phase in ['Succeeded']
+                kind: ConfigMap
+                metadata:
+                  labels:
+                    app.kubernetes.io/managed-by: openshift-gitops
+                    app.kubernetes.io/name: argocd-notifications-cm
+                    app.kubernetes.io/part-of: argocd
+                  name: argocd-notifications-cm
+                  namespace: openshift-gitops

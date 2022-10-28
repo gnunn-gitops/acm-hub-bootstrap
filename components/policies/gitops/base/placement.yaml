@@ -13,6 +13,9 @@ subjects:
   - name: policy-sealed-secrets-seed
     kind: Policy
     apiGroup: policy.open-cluster-management.io
+  - name: policy-managed-gitops-notifications-config
+    kind: Policy
+    apiGroup: policy.open-cluster-management.io
 ---
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
