@@ -7,14 +7,8 @@ placementRef:
   kind: PlacementRule
   apiGroup: apps.open-cluster-management.io
 subjects:
-  - name: policy-managed-gitops-operator
-    kind: Policy
-    apiGroup: policy.open-cluster-management.io
-  - name: policy-sealed-secrets-seed
-    kind: Policy
-    apiGroup: policy.open-cluster-management.io
-  - name: policy-managed-gitops-notifications-config
-    kind: Policy
+  - name: gitops
+    kind: PolicySet
     apiGroup: policy.open-cluster-management.io
 ---
 apiVersion: apps.open-cluster-management.io/v1
