@@ -6,3 +6,4 @@ resources:
 - managed-gitops-notifications-config.yaml
 - sealed-secrets-seed.yaml
 - placement.yaml
+- gitops-policy-set.yaml
