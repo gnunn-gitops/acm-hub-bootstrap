@@ -97,6 +97,8 @@ spec:
                     app.kubernetes.io/managed-by: openshift-gitops
                     app.kubernetes.io/name: argocd-notifications-cm
                     app.kubernetes.io/part-of: argocd
+                  annotation:
+                    policy.open-cluster-management.io/disable-templates: "true"
                   name: argocd-notifications-cm
                   namespace: openshift-gitops                
                 data:
