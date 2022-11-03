@@ -1,0 +1,3 @@
+resources:
+- argocd-manage-policies.yaml
+- placementrule.yaml

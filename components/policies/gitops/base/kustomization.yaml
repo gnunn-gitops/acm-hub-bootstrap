@@ -1,7 +1,6 @@
 namespace: open-cluster-management-policies
 
 resources:
-- sealed-secrets-key.yaml
 - managed-gitops-operator.yaml
 - managed-gitops-notifications-config.yaml
 - sealed-secrets-seed.yaml

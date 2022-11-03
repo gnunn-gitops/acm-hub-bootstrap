@@ -1,7 +1,10 @@
 namespace: acm-policies
 
+namespace: acm-policies
+
 resources:
-- namespace.yaml
+- policies-namespace.yaml
 - ../../../../components/policies/compliance/base
 - ../../../../components/policies/cert-expiration/base
 - ../../../../components/policies/gitops/base
+- ../../../../components/policies/argocd-manage-policies/base

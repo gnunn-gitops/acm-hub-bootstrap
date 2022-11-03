@@ -1,1 +1,1 @@
-kustomize build bootstrap/policies/overlays/default | oc apply -f -
+kustomize build bootstrap/aggregate/overlays/policies-and-secrets | oc apply -f -
