@@ -77,7 +77,7 @@ spec:
         kind: ConfigurationPolicy
         metadata:
           name: policy-managed-argocd-notifications-cm
-          annotation:
+          annotations:
             policy.open-cluster-management.io/disable-templates: "true"
         spec:
           remediationAction: enforce
