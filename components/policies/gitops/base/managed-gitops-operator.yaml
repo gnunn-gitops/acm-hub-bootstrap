@@ -145,7 +145,6 @@ spec:
                   name: openshift-gitops
                   namespace: openshift-gitops
                 spec:
-                  applicationInstanceLabelKey: argocd.argoproj.io/instance
                   resourceTrackingMethod: annotation
                   applicationSet: {}
                   kustomizeBuildOptions: "--enable-helm"
