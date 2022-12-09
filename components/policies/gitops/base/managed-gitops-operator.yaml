@@ -173,18 +173,18 @@ spec:
                         cpu: 250m
                         memory: 256Mi
                   server:
-                    insecure: false
+                    insecure: true
                     route:
                       enabled: true
                       tls:
-                        termination: reencrypt
+                        termination: edge
                         insecureEdgeTerminationPolicy: Redirect
                   sso:
                     dex:
                       openShiftOAuth: true
                     provider: dex
                   notifications:
-                    enabled: true                                              
+                    enabled: true
                   resourceCustomizations: |
                     argoproj.io/Application:
                       health.lua: |
