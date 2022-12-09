@@ -151,10 +151,9 @@ spec:
                   controller:
                     resources:
                       limits:
-                        cpu: '2'
                         memory: 3Gi
                       requests:
-                        cpu: 250m
+                        cpu: 500m
                         memory: 2Gi
                   repo:
                     resources:
