@@ -122,7 +122,7 @@ spec:
                   syncPolicy:
                     automated:
                       prune: false
-                      selfHeal: true
+                      selfHeal: false
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
