@@ -53,6 +53,10 @@ spec:
                   name: openshift-gitops-operator
                   namespace: openshift-operators
                 spec:
+                  config:
+                    env:
+                    - name: ARGOCD_CLUSTER_CONFIG_NAMESPACES
+                      value: openshift-gitops, gitops
                   channel: gitops-1.7
                   installPlanApproval: Automatic
                   name: openshift-gitops-operator
