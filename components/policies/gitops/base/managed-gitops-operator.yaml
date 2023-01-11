@@ -159,10 +159,6 @@ spec:
                   kustomizeBuildOptions: "--enable-helm"
                   controller:
                     env:
-                      - name: INFRASTRUCTURE_ID
-                        value: '{{ (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.infrastructureName }}'
-                      - name: CLUSTER_ID
-                        value: '{{ (lookup "config.openshift.io/v1" "ClusterVersion" "" "version").spec.clusterID }}'
                       - name: ARGOCD_K8S_CLIENT_BURST
                         value: '350'
                       - name: ARGOCD_K8S_CLIENT_QPS
@@ -174,6 +170,11 @@ spec:
                         cpu: 500m
                         memory: 2Gi
                   repo:
+                    env:
+                      - name: INFRASTRUCTURE_ID
+                        value: '{{ (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.infrastructureName }}'
+                      - name: CLUSTER_ID
+                        value: '{{ (lookup "config.openshift.io/v1" "ClusterVersion" "" "version").spec.clusterID }}'
                     resources:
                       limits:
                         cpu: '1'
