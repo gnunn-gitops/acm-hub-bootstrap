@@ -155,7 +155,7 @@ spec:
                     - name: kustomize-envvar
                           generate:
                             command: ["sh", "-c"]
-                            args: ["kustomize build --enable-helm . | perl -pe 's{\$(\{)?(\w+)(?(1)\})}{$ENV{$2} // $&}ge'"]
+                            args: ["kustomize build --enable-helm . | perl -pe 's{\\$(\\{)?(\\w+)(?(1)\\})}{$ENV{$2} // $&}ge'"]
                   kustomizeBuildOptions: "--enable-helm"
                   controller:
                     env:
