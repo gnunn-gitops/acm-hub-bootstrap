@@ -155,7 +155,7 @@ spec:
                   controller:
                     env:
                       - name: INFRASTRUCTURE_ID
-                        value: {{ (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.infrastructureName }}
+                        value: '{{ (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.infrastructureName }}'
                     resources:
                       limits:
                         memory: 3Gi
