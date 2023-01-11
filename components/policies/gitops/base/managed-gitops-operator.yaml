@@ -157,7 +157,7 @@ spec:
                       - name: INFRASTRUCTURE_ID
                         value: '{{ (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.infrastructureName }}'
                       - name: CLUSTER_ID
-                        value: '{{ (lookup "config.openshift.io/v1" "ClusterVersion" "" "cluster").spec.clusterID }}'
+                        value: '{{ (lookup "config.openshift.io/v1" "ClusterVersion" "" "version").spec.clusterID }}'
                       - name: ARGOCD_K8S_CLIENT_BURST
                         value: '350'
                       - name: ARGOCD_K8S_CLIENT_QPS
