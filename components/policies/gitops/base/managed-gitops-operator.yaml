@@ -165,10 +165,10 @@ spec:
                         value: '350'
                     resources:
                       limits:
-                        memory: 3Gi
+                        memory: 4Gi
                       requests:
-                        cpu: 500m
-                        memory: 2Gi
+                        cpu: 1000m
+                        memory: 3Gi
                   repo:
                     env:
                       - name: INFRASTRUCTURE_ID
