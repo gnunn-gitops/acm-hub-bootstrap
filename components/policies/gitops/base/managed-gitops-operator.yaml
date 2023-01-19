@@ -35,6 +35,63 @@ spec:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
         metadata:
+          name: policy-managed-openshift-gitops-clusterroles
+        spec:
+          remediationAction: enforce
+          severity: low
+          namespaceSelector:
+            exclude:
+              - kube-*
+            include:
+              - default
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: rbac.authorization.k8s.io/v1
+                kind: ClusterRole
+                metadata:
+                  annotations:
+                    rbac.authorization.kubernetes.io/autoupdate: "true"
+                  name: gitops-controller
+                aggregationRule:
+                  clusterRoleSelectors:
+                  - matchLabels:
+                      gitops/aggregate-to-controller: "true"
+                rules: []
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: rbac.authorization.k8s.io/v1
+                kind: ClusterRole
+                metadata:
+                  name: gitops-controller-admin
+                  labels:
+                    gitops/aggregate-to-controller: "true"
+                aggregationRule:
+                  clusterRoleSelectors:
+                  - matchLabels:
+                      rbac.authorization.k8s.io/aggregate-to-admin: "true"
+                rules: []
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: rbac.authorization.k8s.io/v1
+                kind: ClusterRole
+                metadata:
+                  name: gitops-controller-view
+                  labels:
+                    gitops/aggregate-to-controller: "true"
+                rules:
+                - apiGroups:
+                  - '*'
+                  resources:
+                  - '*'
+                  verbs:
+                  - get
+                  - list
+                  - watch
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
           name: policy-managed-openshift-gitops-subscription
         spec:
           remediationAction: enforce
@@ -57,6 +114,8 @@ spec:
                     env:
                     - name: ARGOCD_CLUSTER_CONFIG_NAMESPACES
                       value: openshift-gitops, gitops
+                    - name: CONTROLLER_CLUSTER_ROLE
+                    - value: gitops-controller
                   channel: gitops-1.7
                   installPlanApproval: Automatic
                   name: openshift-gitops-operator
