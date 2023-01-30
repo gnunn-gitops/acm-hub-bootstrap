@@ -230,6 +230,10 @@ spec:
                         value: '{{ (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.infrastructureName }}'
                       - name: CLUSTER_ID
                         value: '{{ (lookup "config.openshift.io/v1" "ClusterVersion" "" "version").spec.clusterID }}'
+                      - name: CLUSTER_NAME
+                        value: '{{ fromClusterClaim "gitops" }}'
+                      - name: SUB_DOMAIN
+                        value: '{{ (lookup "config.openshift.io/v1" "Ingress" "openshift-ingress" "cluster").spec.domain }}'
                     resources:
                       limits:
                         cpu: '1'
