@@ -1,5 +1,6 @@
 resources:
 - namespace.yaml
+- custom-metrics-allowlist.yaml
 - multiclusterobservability.yaml
 - thanos-object-storage.yaml
 - gitops-dashboard.yaml
