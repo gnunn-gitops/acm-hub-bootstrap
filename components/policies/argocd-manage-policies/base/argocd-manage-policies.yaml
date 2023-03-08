@@ -33,7 +33,7 @@ spec:
                   namespace: openshift-gitops
                 spec:
                   destination:
-                    namespace: openshift-gitops
+                    namespace: acm-policies
                     server: https://kubernetes.default.svc
                   project: cluster-config
                   source:
@@ -43,4 +43,3 @@ spec:
                   syncPolicy:
                     automated:
                       selfHeal: true
-
