@@ -9,7 +9,7 @@ metadata:
     policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
 spec:
   remediationAction: enforce
-  disabled: true
+  disabled: false
   policy-templates:
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
@@ -116,7 +116,7 @@ spec:
                       value: openshift-gitops, gitops
                     - name: CONTROLLER_CLUSTER_ROLE
                       value: gitops-controller
-                  channel: gitops-1.7
+                  channel: gitops-1.8
                   installPlanApproval: Automatic
                   name: openshift-gitops-operator
                   source: redhat-operators
