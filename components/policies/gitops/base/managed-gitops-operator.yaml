@@ -117,8 +117,8 @@ spec:
                     - name: CONTROLLER_CLUSTER_ROLE
                       value: gitops-controller
                     # trying out dynamic plugin
-                    - name: DYNAMIC_PLUGIN_START_OCP_VERSION
-                      value: 4.12.0
+                    # - name: DYNAMIC_PLUGIN_START_OCP_VERSION
+                    #   value: 4.12.0
                   channel: gitops-1.8
                   installPlanApproval: Automatic
                   name: openshift-gitops-operator
