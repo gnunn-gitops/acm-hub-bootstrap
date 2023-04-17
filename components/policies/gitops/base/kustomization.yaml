@@ -1,4 +1,4 @@
-namespace: open-cluster-management-policies
+namespace: acm-policies
 
 resources:
 - managed-gitops-operator.yaml
