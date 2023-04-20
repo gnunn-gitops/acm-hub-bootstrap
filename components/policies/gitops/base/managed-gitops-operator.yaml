@@ -440,9 +440,14 @@ spec:
                   ha:
                     enabled: false
                   rbac:
-                    defaultPolicy: role:readonly
                     policy: |
+                      p, role:none, applications, get, */*, deny
+                      p, role:none, certificates, get, *, deny
+                      p, role:none, clusters, get, *, deny
+                      p, role:none, repositories, get, *, deny
+                      p, role:none, projects, get, *, deny
+                      p, role:none, accounts, get, *, deny
+                      p, role:none, gpgkeys, get, *, deny
                       g, system:cluster-admins, role:admin
                       g, cluster-admins, role:admin
-                      g, argocdadmins, role:admin
                     scopes: "[groups]"
