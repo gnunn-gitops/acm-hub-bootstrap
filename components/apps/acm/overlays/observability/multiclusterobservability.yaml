@@ -32,5 +32,5 @@ spec:
       name: thanos-object-storage
     receiveStorageSize: 100Gi
     ruleStorageSize: 1Gi
-    storageClass: gp2
+    storageClass: lvms-vg1
     storeStorageSize: 10Gi
