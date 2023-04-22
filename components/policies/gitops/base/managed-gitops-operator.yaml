@@ -221,6 +221,8 @@ spec:
                   resourceTrackingMethod: annotation
                   applicationSet: {}
                   disableAdmin: false
+                  extraConfig:
+                    accounts.admin: apiKey, login
                   configManagementPlugins: |-
                     - name: kustomize-envvar
                       generate:
