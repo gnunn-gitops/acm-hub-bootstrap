@@ -220,7 +220,7 @@ spec:
                 spec:
                   resourceTrackingMethod: annotation
                   applicationSet: {}
-                  disableAdmin: true
+                  disableAdmin: false
                   configManagementPlugins: |-
                     - name: kustomize-envvar
                       generate:
