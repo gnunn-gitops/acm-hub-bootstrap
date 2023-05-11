@@ -9,3 +9,4 @@ spec:
   - policy-sealed-secrets-seed
   - policy-managed-gitops-operator
   - policy-managed-gitops-notifications-config
+  - policy-secrets-store-common
