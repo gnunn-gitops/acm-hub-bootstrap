@@ -6,3 +6,4 @@ resources:
 - sealed-secrets-seed.yaml
 - placement.yaml
 - gitops-policy-set.yaml
+- eso-secret-store.yaml
