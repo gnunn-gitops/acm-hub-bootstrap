@@ -223,6 +223,7 @@ spec:
                   disableAdmin: false
                   extraConfig:
                     accounts.admin: apiKey, login
+                    ui.cssurl: "https://raw.githubusercontent.com/gnunn-gitops/cluster-config/main/clusters/{{ fromClusterClaim "gitops" }}/argocd/theme/custom-cluster.css"
                   configManagementPlugins: |-
                     - name: kustomize-envvar
                       generate:
