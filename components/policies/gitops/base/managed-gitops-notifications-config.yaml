@@ -62,11 +62,9 @@ spec:
                 spec:
                   secretStoreRef:
                     kind: ClusterSecretStore
-                    name: doppler-common
-
+                    name: doppler-cluster
                   target:
                     name: argocd-notifications-secret
-
                   data:
                     - secretKey: slack-token
                       remoteRef:
