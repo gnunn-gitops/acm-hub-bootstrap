@@ -1,0 +1,15 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: thanos-object-storage
+  namespace: open-cluster-management-observability
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: doppler-cluster
+  target:
+    name: thanos-object-storage
+  data:
+    - secretKey: thanos.yaml
+      remoteRef:
+        key: THANOS

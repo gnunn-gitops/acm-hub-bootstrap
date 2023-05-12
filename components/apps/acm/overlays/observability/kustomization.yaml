@@ -2,5 +2,5 @@ resources:
 - namespace.yaml
 - custom-metrics-allowlist.yaml
 - multiclusterobservability.yaml
-- thanos-object-storage-noobaa.yaml
+- thanos-object-storage-external.yaml
 - gitops-dashboard.yaml
