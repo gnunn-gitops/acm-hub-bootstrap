@@ -218,6 +218,8 @@ spec:
                   name: openshift-gitops
                   namespace: openshift-gitops
                 spec:
+                  banner:
+                    content: 'Cluster: {{ fromClusterClaim "gitops" }}'
                   resourceTrackingMethod: annotation
                   applicationSet: {}
                   disableAdmin: false
