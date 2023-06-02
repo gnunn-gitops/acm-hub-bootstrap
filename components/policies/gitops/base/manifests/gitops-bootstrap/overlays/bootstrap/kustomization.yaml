@@ -1,0 +1,11 @@
+resources:
+- ../../base
+
+patches:
+- patch: |-
+    - op: replace
+      path: /spec/source/path
+      value: clusters/local.hub/argocd/bootstrap
+  target:
+    kind: Application
+    name: cluster-config-bootstrap

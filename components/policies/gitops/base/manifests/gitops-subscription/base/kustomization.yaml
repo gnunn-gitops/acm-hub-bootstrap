@@ -1,0 +1,5 @@
+resources:
+- namespace.yaml
+- subscription.yaml
+- rbac.yaml
+- cluster-admin-rolebinding.yaml

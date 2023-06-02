@@ -1,0 +1,3 @@
+resources:
+- notifications-cm.yaml
+- notifications-secret.yaml

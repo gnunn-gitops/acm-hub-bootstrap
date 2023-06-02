@@ -1,9 +1,4 @@
 namespace: acm-policies
 
-resources:
-- managed-gitops-operator.yaml
-- managed-gitops-notifications-config.yaml
-- sealed-secrets-seed.yaml
-- placement.yaml
-- gitops-policy-set.yaml
-- eso-secret-store.yaml
+generators:
+- policy-generator-config.yaml

@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-config-bootstrap
+  namespace: openshift-gitops
+  labels:
+    gitops.ownedBy: cluster-config
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    # path: clusters/{{ fromSecret "open-cluster-management-agent" "hub-kubeconfig-secret" "cluster-name" | base64dec }}/argocd/bootstrap
+    path: clusters/{{ fromClusterClaim "gitops" }}/argocd/bootstrap
+    repoURL: https://github.com/gnunn-gitops/cluster-config.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+  ignoreDifferences:
+    - group: argoproj.io
+      kind: Application
+      managedFieldsManagers:
+        - argocd-server
+      jsonPointers:
+        - /spec/syncPolicy/automated

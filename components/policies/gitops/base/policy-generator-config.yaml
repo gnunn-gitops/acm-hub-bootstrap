@@ -1,0 +1,29 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: gitops-policy-generator
+policyDefaults:
+  namespace: acm-policies
+  remediationAction: enforce
+  placement:
+    name: placement-policy-gitops
+    clusterSelectors:
+      gitops: ""
+placementBindingDefaults:
+  name: "binding-policy-gitops"
+policies:
+  - name: policy-eso-secret-store
+    manifests:
+      - path: manifests/eso/base/
+  - name: policy-gitops-subscription
+    manifests:
+      - path: manifests/gitops-subscription/base/
+  - name: policy-gitops-instance
+    manifests:
+      - path: manifests/gitops-instance/base/
+  - name: policy-gitops-bootstrap
+    manifests:
+      - path: manifests/gitops-bootstrap/base/
+  - name: policy-gitops-notifications
+    manifests:
+      - path: manifests/gitops-notifications/base/

@@ -1,0 +1,16 @@
+kind: Subscription
+metadata:
+  name: openshift-gitops-operator
+  namespace: openshift-operators
+spec:
+  config:
+    env:
+    - name: ARGOCD_CLUSTER_CONFIG_NAMESPACES
+      value: openshift-gitops, gitops
+    - name: CONTROLLER_CLUSTER_ROLE
+      value: gitops-controller
+  channel: gitops-1.8
+  installPlanApproval: Automatic
+  name: openshift-gitops-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
