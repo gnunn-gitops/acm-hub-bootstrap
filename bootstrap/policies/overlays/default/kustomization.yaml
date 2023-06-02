@@ -3,7 +3,6 @@ namespace: acm-policies
 namespace: acm-policies
 
 resources:
-- policies-namespace.yaml
 - ../../../../components/policies/compliance/base
 - ../../../../components/policies/cert-expiration/base
 - ../../../../components/policies/gitops/base

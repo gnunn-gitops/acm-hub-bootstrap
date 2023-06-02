@@ -1,6 +1,0 @@
-commonLabels:
-  argocd.argoproj.io/instance: acm-policies
-
-resources:
-# - ../../../secrets/base
-- ../../../policies/overlays/default
