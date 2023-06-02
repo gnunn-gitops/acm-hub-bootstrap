@@ -5,10 +5,6 @@ metadata:
 policyDefaults:
   namespace: acm-policies
   remediationAction: enforce
-  placement:
-    name: placement-policy-gitops
-    clusterSelectors:
-      gitops: ""
 placementBindingDefaults:
   name: "binding-policy-gitops"
 policies:
@@ -27,3 +23,17 @@ policies:
   - name: policy-gitops-notifications
     manifests:
       - path: manifests/gitops-notifications/base/
+policySets:
+  - name: "gitops"
+    description: "Policy for bootstrapping cluster with gitops"
+    policies:
+      - policy-eso-secret-store
+      - policy-gitops-subscription
+      - policy-gitops-instance
+      - policy-gitops-bootstrap
+      - policy-gitops-notifications
+    generatePolicySetPlacement: true
+    placement:
+      name: placement-policy-gitops
+      clusterSelectors:
+        gitops: ""
