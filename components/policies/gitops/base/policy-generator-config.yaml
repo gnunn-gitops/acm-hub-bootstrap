@@ -12,6 +12,7 @@ policies:
     manifests:
       - path: manifests/eso/base/
   - name: policy-gitops-subscription
+    remediationAction: enforce
     manifests:
       - path: manifests/gitops-subscription/base/
   - name: policy-gitops-instance
@@ -21,6 +22,7 @@ policies:
     manifests:
       - path: manifests/gitops-bootstrap/base/
   - name: policy-gitops-notifications
+    remediationAction: enforce
     manifests:
       - path: manifests/gitops-notifications/base/
 policySets:
@@ -32,8 +34,6 @@ policySets:
       - policy-gitops-instance
       - policy-gitops-bootstrap
       - policy-gitops-notifications
-    generatePolicySetPlacement: true
+    generatePolicySetPlacement: false
     placement:
       name: placement-policy-gitops
-      labelSelector:
-        gitops: ""
