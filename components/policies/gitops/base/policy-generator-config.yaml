@@ -11,18 +11,23 @@ policies:
   - name: policy-eso-secret-store
     manifests:
       - path: manifests/eso/base/
+        remediationAction: enforce
   - name: policy-gitops-subscription
     manifests:
       - path: manifests/gitops-subscription/base/
+        remediationAction: enforce
   - name: policy-gitops-instance
     manifests:
       - path: manifests/gitops-instance/base/
+        remediationAction: enforce
   - name: policy-gitops-bootstrap
     manifests:
       - path: manifests/gitops-bootstrap/base/
+        remediationAction: enforce
   - name: policy-gitops-notifications
     manifests:
       - path: manifests/gitops-notifications/base/
+        remediationAction: enforce
 policySets:
   - name: "gitops"
     description: "Policy for bootstrapping cluster with gitops"
