@@ -34,6 +34,5 @@ policySets:
       - policy-gitops-instance
       - policy-gitops-bootstrap
       - policy-gitops-notifications
-    generatePolicySetPlacement: false
     placement:
       name: placement-policy-gitops
