@@ -35,5 +35,5 @@ policySets:
     generatePolicySetPlacement: true
     placement:
       name: placement-policy-gitops
-      clusterSelectors:
+      labelSelector:
         gitops: ""
