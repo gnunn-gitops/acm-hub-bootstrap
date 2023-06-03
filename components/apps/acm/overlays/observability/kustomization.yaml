@@ -1,6 +1,35 @@
 resources:
-- namespace.yaml
+- github.com/redhat-cop/gitops-catalog/advanced-cluster-management/instance/observability
 - custom-metrics-allowlist.yaml
-- multiclusterobservability.yaml
-- thanos-object-storage-external.yaml
 - gitops-dashboard.yaml
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/storageConfig/storageClass
+        value: lvms-vg1
+      - op: replace
+        path: /spec/observabilityAddonSpec/interval
+        value: 60
+      - op: add
+        path: /spec/advanced
+        value:
+          alertmanager:
+            replicas: 1
+          grafana:
+            replicas: 1
+          observatoriumAPI:
+            replicas: 1
+          query:
+            replicas: 1
+          queryFrontend:
+            replicas: 1
+          queryFrontendMemcached:
+            replicas: 1
+          rbacQueryProxy:
+            replicas: 1
+          receive:
+            replicas: 1
+    target:
+      kind: MultiClusterObservability
+      name: observability

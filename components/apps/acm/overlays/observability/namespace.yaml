@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    openshift.io/description: ACM Observability
-    openshift.io/display-name: ACM Observability
-  labels:
-  name: open-cluster-management-observability
