@@ -158,9 +158,8 @@ spec:
         - /status/ingress
     policy.open-cluster-management.io/ConfigurationPolicy:
       ignoreDifferences: |
-        jsonPointers:
-        - /status/lastEvaluated
-        - /metadata/resourceVersion
+        managedFieldsManagers:
+        - config-policy-controller
     image.openshift.io/ImageStream:
       health.lua: |
         hs = {}
@@ -256,6 +255,12 @@ spec:
       kinds:
       - ComplianceCheckResult
       - ComplianceRemediation
+    - apiGroups:
+      - policy.open-cluster-management.io
+      clusters:
+      - '*'
+      kinds:
+      - ConfigurationPolicy
   ha:
     enabled: false
   rbac:
