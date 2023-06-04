@@ -157,8 +157,6 @@ spec:
         jsonPointers:
         - /status/ingress
     policy.open-cluster-management.io/ConfigurationPolicy:
-      managedFieldsManagers:
-      - governance-policy-framework-addon
       ignoreDifferences: |
         jsonPointers:
         - /status/lastEvaluated
