@@ -156,10 +156,6 @@ spec:
       ignoreDifferences: |
         jsonPointers:
         - /status/ingress
-    policy.open-cluster-management.io/ConfigurationPolicy:
-      ignoreDifferences: |
-        managedFieldsManagers:
-        - config-policy-controller
     image.openshift.io/ImageStream:
       health.lua: |
         hs = {}
@@ -261,6 +257,11 @@ spec:
       - '*'
       kinds:
       - ConfigurationPolicy
+  resourceIgnoreDifferences:
+    all:
+      managedFieldsManagers:
+        - ocs-operator
+        - config-policy-controller
   ha:
     enabled: false
   rbac:
