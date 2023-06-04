@@ -262,7 +262,7 @@ spec:
       managedFieldsManagers:
         - ocs-operator
         - config-policy-controller
-    identifiers:
+    resourceIdentifiers:
       - group: ocs.openshift.io
         kind: StorageCluster
         customization:
