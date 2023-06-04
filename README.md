@@ -4,9 +4,9 @@ This repository is used to bootstrap the RHACM Hub cluster as well as hold the A
 I use in my homelab environment. It is referenced by the [cluster-config](https://github.com/gnunn-gitops/cluster-config) repo for the `local.hub` cluster's ACM applications (Hub, Policies and Observerability).
 
 From the perspective of bootstrapping the Hub there are a couple of different ways to go. You could
-manually install OpenShift GitOps and have it bootstrap everything. However I'm using ACM to bootstrap
-my managed clusters and I wanted to use the exact same workflow if I could for the Hub. This is because
-I wanted to avoid having to create a tweaked workflow just for the Hub.
+manually install OpenShift GitOps and have it bootstrap everything on the Hub including RHACM. However while
+I did consider that approach I'm using ACM to bootstrap my managed clusters and I wanted to use the exact same workflow
+if I could for the Hub. This is because I wanted to avoid having to create a tweaked workflow just for the Hub.
 
 ### Bootstrap Process
 
@@ -24,3 +24,6 @@ deploy the bootstrap application pointing to the repo and path needed for this c
 At this point the GitOps operator deploys everything the Hub cluster requires including storage, operators, etc
 as well as other ACM components. In particular, the components that the script deployed (Hub + Policies) have
 Argo applications that will take over managing these.
+
+With the script bootstrapping the Hub because a one command affair. Once the command completes successfully
+I walk away for 20-30 minutes while everything gets sorted out.
