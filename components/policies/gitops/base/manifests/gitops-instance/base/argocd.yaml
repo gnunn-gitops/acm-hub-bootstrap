@@ -156,6 +156,10 @@ spec:
       ignoreDifferences: |
         jsonPointers:
         - /status/ingress
+    policy.open-cluster-management.io/ConfigurationPolicy:
+      ignoreDifferences: |
+        jsonPointers:
+        - /status/lastEvaluated
     image.openshift.io/ImageStream:
       health.lua: |
         hs = {}
