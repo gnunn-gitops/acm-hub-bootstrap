@@ -10,7 +10,7 @@ I wanted to avoid having to create a tweaked workflow just for the Hub.
 
 ### Bootstrap Process
 
-The bootstrap process, encapsulated in the bootstrap.sh script, is as follows:
+The bootstrap process, encapsulated in the `bootstrap.sh` script, is as follows:
 
 1. Install the RHACM operator and wait for it to complete
 2. Install the MultiClusterHub custom resource and wait for it to be in the Running phase
