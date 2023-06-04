@@ -9,7 +9,7 @@ spec:
   destination:
     namespace: openshift-gitops
     server: https://kubernetes.default.svc
-  project: default
+  project: bootstrap
   source:
     # path: clusters/{{ fromSecret "open-cluster-management-agent" "hub-kubeconfig-secret" "cluster-name" | base64dec }}/argocd/bootstrap
     path: clusters/{{ fromClusterClaim "gitops" }}/argocd/bootstrap
