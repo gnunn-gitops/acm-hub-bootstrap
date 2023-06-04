@@ -262,6 +262,15 @@ spec:
       managedFieldsManagers:
         - ocs-operator
         - config-policy-controller
+    identifiers:
+      - group: ocs.openshift.io
+        kind: StorageCluster
+        customization:
+          managedFieldsManagers:
+            - ocs-operator
+          jsonPointers:
+            - /status/conditions
+            - /metadata/resourceVersion
   ha:
     enabled: false
   rbac:
