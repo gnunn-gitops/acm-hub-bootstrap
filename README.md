@@ -27,3 +27,12 @@ Argo applications that will take over managing these.
 
 With the script bootstrapping the Hub because a one command affair. Once the command completes successfully
 I walk away for 20-30 minutes while everything gets sorted out.
+
+### Side-note on LVM Operator
+
+If you are running a SNO cluster like I am and using the LVM Operator make sure that whatever device you are
+using for storage with it is free. For example, if you are doing a reinstall of the hub (or other cluster), after
+the cluster is provisioned but before you provision Day 2 ops ssh to the cluster and run `lsblk` to make sure
+the device is empty with no partitions.
+
+A reminder for future me. :)
