@@ -162,6 +162,7 @@ spec:
       ignoreDifferences: |
         jsonPointers:
         - /status/lastEvaluated
+        - /metadata/resourceVersion
     image.openshift.io/ImageStream:
       health.lua: |
         hs = {}
