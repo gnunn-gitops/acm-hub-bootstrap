@@ -25,6 +25,8 @@ policies:
     remediationAction: enforce
     manifests:
       - path: manifests/gitops-notifications/base/
+    configurationPolicyAnnotations:
+      policy.open-cluster-management.io/disable-templates: "true"
 policySets:
   - name: "gitops"
     description: "Policy for bootstrapping cluster with gitops"
