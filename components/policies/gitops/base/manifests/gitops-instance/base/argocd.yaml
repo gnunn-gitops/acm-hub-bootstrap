@@ -237,10 +237,6 @@ spec:
         hs.message = "Waiting for PVC"
         return hs
   resourceIgnoreDifferences:
-    all:
-      managedFieldsManagers:
-        - ocs-operator
-        - config-policy-controller
     resourceIdentifiers:
       - group: route.openshift.io
         kind: Route
@@ -252,8 +248,19 @@ spec:
         customization:
           jsonPointers:
             - /status/ingress
+      - group: noobaa.io
+        kind: BackingStore
+        managedFieldsManagers:
+          - noobaa-operator
+        customization:
+          jsonPointers:
+            - /status
+            - /metadata/resourceVersion
       - group: ocs.openshift.io
         kind: StorageCluster
+        managedFieldsManagers:
+          - ocs-operator
+          - manager
         customization:
           jsonPointers:
             - /status
