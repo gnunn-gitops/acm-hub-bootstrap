@@ -250,18 +250,18 @@ spec:
             - /status/ingress
       - group: noobaa.io
         kind: BackingStore
-        managedFieldsManagers:
-          - noobaa-operator
         customization:
+          managedFieldsManagers:
+            - noobaa-operator
           jsonPointers:
             - /status
             - /metadata/resourceVersion
       - group: ocs.openshift.io
         kind: StorageCluster
-        managedFieldsManagers:
-          - ocs-operator
-          - manager
         customization:
+          managedFieldsManagers:
+            - ocs-operator
+            - manager
           jsonPointers:
             - /status
             - /metadata/resourceVersion
