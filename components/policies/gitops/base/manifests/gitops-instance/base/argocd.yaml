@@ -255,8 +255,6 @@ spec:
       - group: ocs.openshift.io
         kind: StorageCluster
         customization:
-          managedFieldsManagers:
-            - ocs-operator
           jsonPointers:
             - /status/conditions
             - /metadata/resourceVersion
