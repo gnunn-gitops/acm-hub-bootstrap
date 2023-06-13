@@ -256,7 +256,7 @@ spec:
         kind: StorageCluster
         customization:
           jsonPointers:
-            - /status/conditions
+            - /status
             - /metadata/resourceVersion
   resourceExclusions: |
     - apiGroups:
