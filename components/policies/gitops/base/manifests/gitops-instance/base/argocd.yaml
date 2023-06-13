@@ -248,23 +248,6 @@ spec:
         customization:
           jsonPointers:
             - /status/ingress
-      - group: noobaa.io
-        kind: BackingStore
-        customization:
-          managedFieldsManagers:
-            - noobaa-operator
-          jsonPointers:
-            - /status
-            - /metadata/resourceVersion
-      - group: ocs.openshift.io
-        kind: StorageCluster
-        customization:
-          managedFieldsManagers:
-            - ocs-operator
-            - manager
-          jsonPointers:
-            - /status
-            - /metadata/resourceVersion
   resourceExclusions: |
     - apiGroups:
       - tekton.dev
