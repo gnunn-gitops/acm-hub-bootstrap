@@ -1,3 +1,12 @@
 resources:
 - github.com/redhat-cop/gitops-catalog/advanced-cluster-management/operator/overlays/release-2.7
 - github.com/redhat-cop/gitops-catalog/advanced-cluster-management/instance/base
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/channel
+        value: 'release-2.8'
+    target:
+      kind: Subscription
+      name: advanced-cluster-management
