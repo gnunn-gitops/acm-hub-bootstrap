@@ -18,7 +18,7 @@ spec:
   syncPolicy:
     automated:
       prune: false
-      selfHeal: true
+      selfHeal: false
   ignoreDifferences:
     - group: argoproj.io
       kind: Application
