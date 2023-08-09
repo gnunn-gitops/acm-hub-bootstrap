@@ -1,2 +1,3 @@
 resources:
+- argocd-external-secret.yaml
 - argocd.yaml
