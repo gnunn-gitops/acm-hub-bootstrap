@@ -6,7 +6,7 @@ metadata:
 spec:
   resourceTrackingMethod: annotation
   applicationSet: {}
-  disableAdmin: true
+  disableAdmin: false
   extraConfig:
     accounts.admin: apiKey, login
     ui.cssurl: 'https://gnunn-gitops.github.io/cluster-config/themes/{{ fromClusterClaim "gitops" }}/custom-cluster.css'
