@@ -1,3 +1,5 @@
 resources:
+# Workaround from https://access.redhat.com/solutions/7008721
+- argocd-repo-service.yaml
 - notifications-cm.yaml
 - notifications-secret.yaml

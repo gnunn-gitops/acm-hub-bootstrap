@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: repo-server
+    app.kubernetes.io/managed-by: openshift-gitops
+    app.kubernetes.io/name: openshift-gitops-repo-server
+    app.kubernetes.io/part-of: argocd
+  name: argocd-repo-server
+  namespace: openshift-gitops
+spec:
+  ports:
+  - name: port-1
+    port: 8081
+  - name: port-2
+    port: 8084
+  selector:
+    app.kubernetes.io/name: openshift-gitops-repo-server
