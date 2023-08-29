@@ -11,14 +11,13 @@ spec:
     server: https://kubernetes.default.svc
   project: bootstrap
   source:
-    # path: clusters/{{ fromSecret "open-cluster-management-agent" "hub-kubeconfig-secret" "cluster-name" | base64dec }}/argocd/bootstrap
     path: clusters/{{ fromClusterClaim "gitops" }}/argocd/bootstrap
     repoURL: https://github.com/gnunn-gitops/cluster-config.git
     targetRevision: main
   syncPolicy:
     automated:
       prune: false
-      selfHeal: false
+      selfHeal: true
   ignoreDifferences:
     - group: argoproj.io
       kind: Application
