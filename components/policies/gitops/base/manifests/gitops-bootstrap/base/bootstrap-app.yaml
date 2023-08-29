@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: bootstrap
   source:
-    path: clusters/overlays/{{ fromClusterClaim "gitops" }}/argocd/bootstrap
+    path: bootstrap/overlays/{{ fromClusterClaim "gitops" }}
     repoURL: https://github.com/gnunn-gitops/cluster-config.git
     targetRevision: main
   syncPolicy:
