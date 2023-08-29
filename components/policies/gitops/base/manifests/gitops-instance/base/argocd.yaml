@@ -19,8 +19,8 @@ spec:
   configManagementPlugins: |-
     - name: kustomize-envvar
       generate:
-        command: ["sh", "-c"]
-        args: ["kustomize build --enable-helm . | perl -pe 's{\\$(\\{)?(\\w+)(?(1)\\})}{$ENV{$2} // $&}ge'"]
+        command: ["bash", "-c"]
+        args: ["set -o pipefail && kustomize build --enable-helm . | perl -pe 's{\\$(\\{)?(\\w+)(?(1)\\})}{$ENV{$2} // $&}ge'"]
   kustomizeBuildOptions: "--enable-helm --enable-alpha-plugins"
   controller:
     resources:
