@@ -244,21 +244,6 @@ spec:
     #     return hs
   # PV health check here due to bug in operator in how it generates check for objects with no group
   resourceCustomizations: |
-    resourceActions:
-      discovery.lua
-        - group: route.openshift.io
-          kind: Route
-          action: |
-            discovery.lua: |
-            actions = {}
-            scheme = "http"
-            if obj.spec.tls and obj.spec.tls.termination then
-              if obj.spec.tls.termination=="edge" or obj.spec.tls.termination=="passthrough" then
-                scheme = "https"
-              end
-            end
-            obj.spec.annotations["link.argocd.argoproj.io/external-link"] = os.date("!%Y-%m-%dT%XZ")
-            return actions
     PersistentVolumeClaim:
       health.lua: |
         hs = {}
@@ -279,6 +264,20 @@ spec:
         hs.status = "Progressing"
         hs.message = "Waiting for certificate"
         return hs
+  resourceActions:
+    - group: route.openshift.io
+      kind: Route
+      action: |
+        discovery.lua: |
+        actions = {}
+        scheme = "http"
+        if obj.spec.tls and obj.spec.tls.termination then
+          if obj.spec.tls.termination=="edge" or obj.spec.tls.termination=="passthrough" then
+            scheme = "https"
+          end
+        end
+        obj.spec.annotations["link.argocd.argoproj.io/external-link"] = os.date("!%Y-%m-%dT%XZ")
+        return actions
   resourceIgnoreDifferences:
     resourceIdentifiers:
       - group: route.openshift.io
