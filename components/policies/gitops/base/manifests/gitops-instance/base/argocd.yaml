@@ -272,8 +272,6 @@ spec:
           jsonPointers:
             - /status/ingress
             - /metadata/annotations
-        managedFieldsManagers:
-        - kyverno
       - group: quay.redhat.com
         kind: QuayRegistry
         customization:
