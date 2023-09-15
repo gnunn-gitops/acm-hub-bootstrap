@@ -269,15 +269,15 @@ spec:
       kind: Route
       action: |
         discovery.lua: |
-        actions = {}
-        scheme = "http"
-        if obj.spec.tls and obj.spec.tls.termination then
-          if obj.spec.tls.termination=="edge" or obj.spec.tls.termination=="passthrough" then
-            scheme = "https"
+          actions = {}
+          scheme = "http"
+          if obj.spec.tls and obj.spec.tls.termination then
+            if obj.spec.tls.termination=="edge" or obj.spec.tls.termination=="passthrough" then
+              scheme = "https"
+            end
           end
-        end
-        obj.spec.annotations["link.argocd.argoproj.io/external-link"] = os.date("!%Y-%m-%dT%XZ")
-        return actions
+          obj.spec.annotations["link.argocd.argoproj.io/external-link"] = scheme + "://" + obj.spec.host
+          return actions
   resourceIgnoreDifferences:
     resourceIdentifiers:
       - group: route.openshift.io
