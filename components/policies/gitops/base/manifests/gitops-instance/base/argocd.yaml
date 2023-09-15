@@ -264,20 +264,6 @@ spec:
         hs.status = "Progressing"
         hs.message = "Waiting for certificate"
         return hs
-  resourceActions:
-    - group: route.openshift.io
-      kind: Route
-      action: |
-        discovery.lua: |
-          actions = {}
-          scheme = "http"
-          if obj.spec.tls and obj.spec.tls.termination then
-            if obj.spec.tls.termination=="edge" or obj.spec.tls.termination=="passthrough" then
-              scheme = "https"
-            end
-          end
-          obj.metadata.annotations["link.argocd.argoproj.io/external-link"] = scheme + "://" + obj.spec.host
-          return actions
   resourceIgnoreDifferences:
     resourceIdentifiers:
       - group: route.openshift.io
