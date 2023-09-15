@@ -276,7 +276,7 @@ spec:
               scheme = "https"
             end
           end
-          obj.spec.annotations["link.argocd.argoproj.io/external-link"] = scheme + "://" + obj.spec.host
+          obj.metadata.annotations["link.argocd.argoproj.io/external-link"] = scheme + "://" + obj.spec.host
           return actions
   resourceIgnoreDifferences:
     resourceIdentifiers:
