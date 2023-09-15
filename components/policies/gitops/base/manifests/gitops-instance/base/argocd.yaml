@@ -285,6 +285,7 @@ spec:
         customization:
           jsonPointers:
             - /status/ingress
+            - /metadata/annotations/link.argocd.argoproj.io~1external-link
       - group: quay.redhat.com
         kind: QuayRegistry
         customization:
