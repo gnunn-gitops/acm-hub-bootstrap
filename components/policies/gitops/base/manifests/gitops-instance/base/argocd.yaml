@@ -11,6 +11,10 @@ spec:
     accounts.admin: apiKey, login
     resource.compareoptions: |
       ignoreDifferencesOnResourceUpdates: true
+    resource.customizations.ignoreResourceUpdates.ocs.openshift.io_StorageCluster: |
+      jsonPointers:
+      - /status
+      - /metadata/resourceVersion
     ui.cssurl: 'https://gnunn-gitops.github.io/cluster-config/themes/{{ fromClusterClaim "gitops" }}/custom-cluster.css'
     oidc.config: |
       name: Keycloak
@@ -247,11 +251,6 @@ spec:
 
   # PV health check here due to bug in operator in how it generates check for objects with no group
   resourceCustomizations: |
-    ocs.openshift.io/StorageCluster:
-      ignoreResourceUpdates: |
-        jsonPointers:
-        - /status
-        - /metadata/resourceVersion
     PersistentVolumeClaim:
       health.lua: |
         hs = {}
