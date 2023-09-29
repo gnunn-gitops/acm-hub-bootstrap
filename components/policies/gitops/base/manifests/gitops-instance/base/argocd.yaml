@@ -9,6 +9,8 @@ spec:
   disableAdmin: false
   extraConfig:
     accounts.admin: apiKey, login
+    resource.compareoptions: |
+      ignoreDifferencesOnResourceUpdates: true
     ui.cssurl: 'https://gnunn-gitops.github.io/cluster-config/themes/{{ fromClusterClaim "gitops" }}/custom-cluster.css'
     oidc.config: |
       name: Keycloak
@@ -242,6 +244,15 @@ spec:
     #     hs.status = "Progressing"
     #     hs.message = "Waiting for PVC"
     #     return hs
+
+    # Hold if needed while testing
+    # ocs.openshift.io/StorageCluster:
+    #   ignoreResourceUpdates: |
+    #     jsonPointers:
+    #     - /status
+    #     - /metadata/resourceVersion
+
+
   # PV health check here due to bug in operator in how it generates check for objects with no group
   resourceCustomizations: |
     PersistentVolumeClaim:
