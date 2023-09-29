@@ -245,16 +245,13 @@ spec:
     #     hs.message = "Waiting for PVC"
     #     return hs
 
-    # Hold if needed while testing
-    # ocs.openshift.io/StorageCluster:
-    #   ignoreResourceUpdates: |
-    #     jsonPointers:
-    #     - /status
-    #     - /metadata/resourceVersion
-
-
   # PV health check here due to bug in operator in how it generates check for objects with no group
   resourceCustomizations: |
+    ocs.openshift.io/StorageCluster:
+      ignoreResourceUpdates: |
+        jsonPointers:
+        - /status
+        - /metadata/resourceVersion
     PersistentVolumeClaim:
       health.lua: |
         hs = {}
