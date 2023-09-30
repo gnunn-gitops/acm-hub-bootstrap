@@ -22,7 +22,7 @@ spec:
       clientID: argocd
       clientSecret: $oidc.keycloak.clientSecret
       requestedScopes: ["openid", "profile", "email", "groups"]
-  configManagementPlugins: |-
+  configManagementPlugins: |
     - name: kustomize-envvar
       generate:
         command: ["bash", "-c"]
