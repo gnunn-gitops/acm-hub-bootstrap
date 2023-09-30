@@ -8,6 +8,8 @@ spec:
   applicationSet: {}
   disableAdmin: false
   extraConfig:
+    resource.compareoptions: |
+      ignoreDifferencesOnResourceUpdates: true
     accounts.admin: apiKey, login
     ui.cssurl: 'https://gnunn-gitops.github.io/cluster-config/themes/{{ fromClusterClaim "gitops" }}/custom-cluster.css'
     oidc.config: |
