@@ -18,11 +18,6 @@ spec:
       clientID: argocd
       clientSecret: $oidc.keycloak.clientSecret
       requestedScopes: ["openid", "profile", "email", "groups"]
-  configManagementPlugins: |
-    - name: kustomize-envvar
-      generate:
-        command: ["bash", "-c"]
-        args: ["set -o pipefail && kustomize build --enable-helm . | perl -pe 's{\\$(\\{)?(\\w+)(?(1)\\})}{$ENV{$2} // $&}ge'"]
   kustomizeBuildOptions: "--enable-helm --enable-alpha-plugins"
   controller:
     resources:
@@ -47,12 +42,32 @@ spec:
       volumeMounts:
       - mountPath: /policy-generator
         name: policy-generator
+    sidecarContainers:
+      - name: setenv-plugin
+        command: [/var/run/argocd/argocd-cmp-server]
+        image: quay.io/gnunn/tools:latest
+        imagePullPolicy: Always
+        securityContext:
+          runAsNonRoot: true
+        volumeMounts:
+          - mountPath: /var/run/argocd
+            name: var-files
+          - mountPath: /home/argocd/cmp-server/plugins
+            name: plugins
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+            subPath: plugin.yaml
+            name: setenv-cmp-plugin
     volumeMounts:
-    - mountPath: /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
-      name: policy-generator
+      - mountPath: /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
+        name: policy-generator
     volumes:
-    - emptyDir: {}
-      name: policy-generator
+      - emptyDir: {}
+        name: policy-generator
+      - configMap:
+          name: setenv-cmp-plugin
+        name: setenv-cmp-plugin
     env:
       - name: KUSTOMIZE_PLUGIN_HOME
         value: /etc/kustomize/plugin
