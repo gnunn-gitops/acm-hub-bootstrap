@@ -32,6 +32,19 @@ spec:
     sidecarContainers:
       - name: setenv-plugin
         command: [/var/run/argocd/argocd-cmp-server]
+        env:
+          - name: KUSTOMIZE_PLUGIN_HOME
+            value: /etc/kustomize/plugin
+          - name: INFRASTRUCTURE_ID
+            value: '{{ (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.infrastructureName }}'
+          - name: CLUSTER_ID
+            value: '{{ (lookup "config.openshift.io/v1" "ClusterVersion" "" "version").spec.clusterID }}'
+          - name: CLUSTER_GITOPS_NAME
+            value: '{{ fromClusterClaim "gitops" }}'
+          - name: CLUSTER_NAME
+            value: '{{ fromClusterClaim "name" }}'
+          - name: SUB_DOMAIN
+            value: '{{ (lookup "config.openshift.io/v1" "Ingress" "openshift-ingress" "cluster").spec.domain }}'
         image: quay.io/gnunn/tools:latest
         imagePullPolicy: Always
         securityContext:
@@ -50,19 +63,6 @@ spec:
       - configMap:
           name: setenv-cmp-plugin
         name: setenv-cmp-plugin
-    env:
-      - name: KUSTOMIZE_PLUGIN_HOME
-        value: /etc/kustomize/plugin
-      - name: INFRASTRUCTURE_ID
-        value: '{{ (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.infrastructureName }}'
-      - name: CLUSTER_ID
-        value: '{{ (lookup "config.openshift.io/v1" "ClusterVersion" "" "version").spec.clusterID }}'
-      - name: CLUSTER_GITOPS_NAME
-        value: '{{ fromClusterClaim "gitops" }}'
-      - name: CLUSTER_NAME
-        value: '{{ fromClusterClaim "name" }}'
-      - name: SUB_DOMAIN
-        value: '{{ (lookup "config.openshift.io/v1" "Ingress" "openshift-ingress" "cluster").spec.domain }}'
     resources:
       limits:
         cpu: '1'
