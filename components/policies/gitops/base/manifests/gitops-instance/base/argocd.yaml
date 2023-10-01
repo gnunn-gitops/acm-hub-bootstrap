@@ -29,19 +29,6 @@ spec:
   monitoring:
     enabled: true
   repo:
-    initContainers:
-    - args:
-      - -c
-      - cp /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
-        /policy-generator/PolicyGenerator
-      command:
-      - /bin/bash
-      #image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel8:v2.7
-      image: quay.io/open-cluster-management/multicloud-operators-subscription:latest
-      name: policy-generator-install
-      volumeMounts:
-      - mountPath: /policy-generator
-        name: policy-generator
     sidecarContainers:
       - name: setenv-plugin
         command: [/var/run/argocd/argocd-cmp-server]
@@ -59,12 +46,7 @@ spec:
           - mountPath: /home/argocd/cmp-server/config/plugin.yaml
             subPath: plugin.yaml
             name: setenv-cmp-plugin
-    volumeMounts:
-      - mountPath: /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
-        name: policy-generator
     volumes:
-      - emptyDir: {}
-        name: policy-generator
       - configMap:
           name: setenv-cmp-plugin
         name: setenv-cmp-plugin
