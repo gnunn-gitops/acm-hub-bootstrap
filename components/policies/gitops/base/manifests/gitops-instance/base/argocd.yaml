@@ -9,6 +9,9 @@ spec:
   disableAdmin: false
   extraConfig:
     resource.ignoreResourceUpdatesEnabled: 'true'
+    resource.customizations.ignoreResourceUpdates.all: |
+      jsonPointers:
+      - /status
     resource.compareoptions: |
       ignoreDifferencesOnResourceUpdates: true
     resource.customizations.ignoreResourceUpdates.ocs.openshift.io_StorageCluster: |
