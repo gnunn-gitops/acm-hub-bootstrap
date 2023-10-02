@@ -35,6 +35,7 @@ spec:
       requestedScopes: ["openid", "profile", "email", "groups"]
   kustomizeBuildOptions: "--enable-helm --enable-alpha-plugins"
   controller:
+    logLevel: debug
     resources:
       limits:
         memory: 4Gi
