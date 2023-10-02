@@ -280,12 +280,6 @@ spec:
       kinds:
       - ComplianceCheckResult
       - ComplianceRemediation
-    - apiGroups:
-      - policy.open-cluster-management.io
-      clusters:
-      - '*'
-      kinds:
-      - ConfigurationPolicy
   ha:
     enabled: false
   rbac:
