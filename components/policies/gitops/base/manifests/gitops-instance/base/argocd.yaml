@@ -8,6 +8,7 @@ spec:
   applicationSet: {}
   disableAdmin: false
   extraConfig:
+    resource.ignoreResourceUpdatesEnabled: 'true'
     resource.compareoptions: |
       ignoreDifferencesOnResourceUpdates: true
     resource.customizations.ignoreResourceUpdates.ocs.openshift.io_StorageCluster: |
