@@ -22,6 +22,10 @@ spec:
       jsonPointers:
       - /status
       - /metadata/resourceVersion
+    resource.customizations.ignoreResourceUpdates.policy.open-cluster-management.io_ConfigurationPolicy: |
+      jsonPointers:
+      - /status
+      - /metadata/resourceVersion
     accounts.admin: apiKey, login
     ui.cssurl: 'https://gnunn-gitops.github.io/cluster-config/themes/{{ fromClusterClaim "gitops" }}/custom-cluster.css'
     oidc.config: |
