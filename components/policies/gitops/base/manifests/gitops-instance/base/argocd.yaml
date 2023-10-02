@@ -9,6 +9,9 @@ spec:
   disableAdmin: false
   extraConfig:
     resource.ignoreResourceUpdatesEnabled: 'true'
+    resource.customizations.ignoreResourceUpdates.external-secrets.io_ExternalSecret: |
+      jsonPointers:
+      - /status/refreshTime
     resource.customizations.ignoreResourceUpdates.ocs.openshift.io_StorageCluster: |
       jsonPointers:
       - /status
