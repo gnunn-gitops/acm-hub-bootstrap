@@ -9,14 +9,21 @@ spec:
   disableAdmin: false
   extraConfig:
     resource.ignoreResourceUpdatesEnabled: 'true'
-    resource.customizations.ignoreResourceUpdates.all: |
+    resource.customizations.ignoreResourceUpdates.ocs.openshift.io_StorageCluster: |
       jsonPointers:
       - /status
       - /metadata/resourceVersion
-    resource.customizations.ignoreResourceUpdates.policy.open-cluster-management.io_ConfigurationPolicy: |
+    resource.customizations.ignoreResourceUpdates.ocs.openshift.io_StorageSystem: |
       jsonPointers:
-      - /status/lastEvaluated
-      - /status/lastEvaluatedGeneration
+      - /status
+      - /metadata/resourceVersion
+    resource.customizations.ignoreResourceUpdates.noobaa.io_Noobaa: |
+      jsonPointers:
+      - /status
+      - /metadata/resourceVersion
+    resource.customizations.ignoreResourceUpdates.noobaa.io_BackingStore: |
+      jsonPointers:
+      - /status
       - /metadata/resourceVersion
     accounts.admin: apiKey, login
     ui.cssurl: 'https://gnunn-gitops.github.io/cluster-config/themes/{{ fromClusterClaim "gitops" }}/custom-cluster.css'
@@ -93,12 +100,6 @@ spec:
       tls:
         termination: edge
         insecureEdgeTerminationPolicy: Redirect
-  # sso:
-  #   dex:
-  #     image: quay.io/gnunn/dex
-  #     version: token-exchange-1.8
-  #     openShiftOAuth: true
-  #   provider: dex
   notifications:
     enabled: true
   resourceHealthChecks:
@@ -276,6 +277,14 @@ spec:
       kinds:
       - ComplianceCheckResult
       - ComplianceRemediation
+    - apiGroups:
+      - policy.open-cluster-management.io
+      kinds:
+      - ConfigurationPolicy
+    - apiGroups:
+      - noobaa.io
+      kinds:
+      - NooBaa
   ha:
     enabled: false
   rbac:
