@@ -17,6 +17,7 @@ spec:
       jsonPointers:
       - /status/lastEvaluated
       - /status/lastEvaluatedGeneration
+      - /metadata/resourceVersion
     accounts.admin: apiKey, login
     ui.cssurl: 'https://gnunn-gitops.github.io/cluster-config/themes/{{ fromClusterClaim "gitops" }}/custom-cluster.css'
     oidc.config: |
