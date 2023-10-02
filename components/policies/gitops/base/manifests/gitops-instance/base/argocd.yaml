@@ -10,6 +10,18 @@ spec:
   extraConfig:
     resource.compareoptions: |
       ignoreDifferencesOnResourceUpdates: true
+    resource.customizations.ignoreResourceUpdates.ocs.openshift.io_StorageCluster: |
+      jsonPointers:
+      - /status
+      - /metadata/resourceVersion
+    resource.customizations.ignoreResourceUpdates.noobaa.io_Noobaa: |
+      jsonPointers:
+      - /status
+      - /metadata/resourceVersion
+    resource.customizations.ignoreResourceUpdates.noobaa.io_BackingStore: |
+      jsonPointers:
+      - /status
+      - /metadata/resourceVersion
     accounts.admin: apiKey, login
     ui.cssurl: 'https://gnunn-gitops.github.io/cluster-config/themes/{{ fromClusterClaim "gitops" }}/custom-cluster.css'
     oidc.config: |
