@@ -22,7 +22,6 @@ metadata:
     openshiftVersion: 4.13.13
     openshiftVersion-major: "4"
     openshiftVersion-major-minor: "4.13"
-    policies: kyverno
     velero.io/exclude-from-backup: "true"
     vendor: OpenShift
   name: local-cluster
