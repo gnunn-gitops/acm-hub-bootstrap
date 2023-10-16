@@ -1,0 +1,3 @@
+resources:
+- local-home.yaml
+- local-hub.yaml
