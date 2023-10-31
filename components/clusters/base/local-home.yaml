@@ -19,7 +19,7 @@ metadata:
     gitops: local.home
     gitops-revision: 693063b618102a76045c1a18767e77fa8c4a65bd
     name: home
-    openshiftVersion: 4.13.13
+    openshiftVersion: 4.13.18
     openshiftVersion-major: "4"
     openshiftVersion-major-minor: "4.13"
     vendor: OpenShift

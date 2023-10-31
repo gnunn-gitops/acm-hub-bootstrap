@@ -19,7 +19,7 @@ metadata:
     gitops-revision: a0b4b638b32f5fa79bbb3524779082dc0c54bdaf
     local-cluster: "true"
     name: local-cluster
-    openshiftVersion: 4.13.13
+    openshiftVersion: 4.13.18
     openshiftVersion-major: "4"
     openshiftVersion-major-minor: "4.13"
     velero.io/exclude-from-backup: "true"
