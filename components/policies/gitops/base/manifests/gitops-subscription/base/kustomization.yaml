@@ -1,5 +1,6 @@
 resources:
 - namespace.yaml
 - subscription.yaml
-- rbac.yaml
+- gitops-controller-rbac.yaml
+- gitops-server-rbac.yaml
 - cluster-admin-rolebinding.yaml
