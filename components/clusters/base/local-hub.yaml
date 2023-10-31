@@ -16,7 +16,7 @@ metadata:
     feature.open-cluster-management.io/addon-observability-controller: available
     feature.open-cluster-management.io/addon-work-manager: available
     gitops: local.hub
-    gitops-revision: 3c6f1028889697babcf8ec6867e245ad7dcba589
+    gitops-revision: a0b4b638b32f5fa79bbb3524779082dc0c54bdaf
     local-cluster: "true"
     name: local-cluster
     openshiftVersion: 4.13.13
