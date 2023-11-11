@@ -16,6 +16,9 @@ policies:
     manifests:
       - path: manifests/gitops-subscription/base/
   - name: policy-gitops-instance
+    # Needed to fix issue with merging lists resulting in duplicates
+    configurationPolicyAnnotations:
+      apps.open-cluster-management.io/reconcile-option: replace
     manifests:
       - path: manifests/gitops-instance/base/
   - name: policy-gitops-bootstrap
