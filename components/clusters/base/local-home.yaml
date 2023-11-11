@@ -16,7 +16,7 @@ metadata:
     feature.open-cluster-management.io/addon-observability-controller: available
     feature.open-cluster-management.io/addon-search-collector: available
     feature.open-cluster-management.io/addon-work-manager: available
-#    gitops: local.home
+    gitops: local.home
     gitops-revision: 15333cd33d7c8b8b6bf3c44c74a9eb875315398d
     name: home
     openshiftVersion-major: "4"
