@@ -17,7 +17,7 @@ metadata:
     feature.open-cluster-management.io/addon-search-collector: available
     feature.open-cluster-management.io/addon-work-manager: available
 #    gitops: local.home
-    gitops-revision: 1487a00b34e0e3a63fa3f75b5416268a97856060
+    gitops-revision: 15333cd33d7c8b8b6bf3c44c74a9eb875315398d
     name: home
     openshiftVersion-major: "4"
     vendor: OpenShift
