@@ -48,13 +48,13 @@ spec:
       return hs
     accounts.admin: apiKey, login
     ui.cssurl: 'https://gnunn-gitops.github.io/cluster-config/themes/{{ fromClusterClaim "gitops" }}/custom-cluster.css'
-    oidc.config: |
-      name: Keycloak
-      issuer: https://sso.ocplab.com/realms/ocplab
-      clientID: argocd
-      clientSecret: $oidc.keycloak.clientSecret
-      requestedScopes: ["openid", "profile", "email", "groups"]
   kustomizeBuildOptions: "--enable-helm --enable-alpha-plugins"
+  oidcConfig: |
+    name: Keycloak
+    issuer: https://sso.ocplab.com/realms/ocplab
+    clientID: argocd
+    clientSecret: $oidc.keycloak.clientSecret
+    requestedScopes: ["openid", "profile", "email", "groups"]
   controller:
     resources:
       limits:
@@ -116,6 +116,7 @@ spec:
         memory: 256Mi
   server:
     insecure: true
+    host: 'openshift-gitops-server-openshift-gitops.{{ (lookup "config.openshift.io/v1" "Ingress" "openshift-ingress" "cluster").spec.domain }}'
     route:
       enabled: true
       tls:
