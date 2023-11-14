@@ -13,3 +13,4 @@ spec:
     server: https://kubernetes.default.svc
   sourceRepos:
   - https://github.com/gnunn-gitops/cluster-config
+  - https://github.com/gnunn-gitops/cluster-config-pins
