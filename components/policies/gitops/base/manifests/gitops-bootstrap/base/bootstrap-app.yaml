@@ -12,7 +12,7 @@ spec:
   project: bootstrap
   source:
     path: bootstrap/overlays/{{ fromClusterClaim "gitops" }}
-    repoURL: https://github.com/gnunn-gitops/cluster-config.git
+    repoURL: https://github.com/gnunn-gitops/cluster-config-pins.git
     targetRevision: 'HEAD'
   syncPolicy:
     automated:
