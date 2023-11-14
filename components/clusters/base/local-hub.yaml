@@ -19,7 +19,6 @@ metadata:
     gitops-revision: HEAD
     local-cluster: "true"
     name: local-cluster
-    openshiftVersion-major: "4"
     velero.io/exclude-from-backup: "true"
     vendor: OpenShift
   name: local-cluster

@@ -13,7 +13,7 @@ spec:
   source:
     path: bootstrap/overlays/{{ fromClusterClaim "gitops" }}
     repoURL: https://github.com/gnunn-gitops/cluster-config.git
-    targetRevision: '{{ fromClusterClaim "gitops-revision" }}'
+    targetRevision: 'HEAD'
   syncPolicy:
     automated:
       prune: false
