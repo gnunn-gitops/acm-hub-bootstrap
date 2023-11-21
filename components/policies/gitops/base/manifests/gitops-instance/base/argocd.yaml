@@ -155,6 +155,8 @@ spec:
                 numDegraded = numDegraded + 1
               elseif (condition.type == "CatalogSourcesUnhealthy" or condition.type == "InstallPlanFailed" or condition.type == "ResolutionFailed") and condition.status == "True" then
                 numDegraded = numDegraded + 1
+              elseif (condition.type == "CatalogSourcesUnhealthy" and condition.status == "False") then
+                break
               end
             end
             if numDegraded == 0 and numPending == 0 then
