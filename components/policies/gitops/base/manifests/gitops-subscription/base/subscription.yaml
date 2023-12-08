@@ -12,7 +12,7 @@ spec:
       value: gitops-controller
     - name: SERVER_CLUSTER_ROLE
       value: gitops-controller
-  channel: gitops-1.10
+  channel: gitops-1.11
   installPlanApproval: Automatic
   name: openshift-gitops-operator
   source: redhat-operators
