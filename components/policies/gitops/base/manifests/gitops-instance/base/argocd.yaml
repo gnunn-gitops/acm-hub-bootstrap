@@ -7,6 +7,7 @@ spec:
   resourceTrackingMethod: annotation
   applicationSet: {}
   extraConfig:
+    resource.respectRBAC: "normal"
     resource.ignoreResourceUpdatesEnabled: 'true'
     resource.customizations.ignoreResourceUpdates.external-secrets.io_ExternalSecret: |
       jsonPointers:
