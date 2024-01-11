@@ -15,6 +15,8 @@ rules:
   - argoproj.io
   resources:
   - applications
+  - approjects
+  - applicationsets
   verbs:
   - list
   - watch
