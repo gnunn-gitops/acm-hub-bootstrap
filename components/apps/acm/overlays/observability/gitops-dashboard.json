@@ -122,7 +122,7 @@
             "thresholds": "",
             "timeFrom": null,
             "timeShift": null,
-            "title": "Hosts",
+            "title": "Clusters",
             "description": "Number of clusters hosting Argo CD",
             "type": "singlestat",
             "valueFontSize": "80%",
@@ -2261,7 +2261,7 @@
                     }
                 }
             ],
-            "title": "Cluster Stats",
+            "title": "Destination Stats",
             "type": "row"
         },
         {
@@ -3919,7 +3919,7 @@
                 "definition": "label_values(argocd_cluster_info, cluster)",
                 "hide": 0,
                 "includeAll": true,
-                "label": "host",
+                "label": "cluster",
                 "multi": false,
                 "name": "host",
                 "options": [],
@@ -4068,7 +4068,7 @@
                 "definition": "label_values(argocd_cluster_info, server)",
                 "hide": 0,
                 "includeAll": true,
-                "label": null,
+                "label": "destination",
                 "multi": false,
                 "name": "cluster",
                 "options": [],
