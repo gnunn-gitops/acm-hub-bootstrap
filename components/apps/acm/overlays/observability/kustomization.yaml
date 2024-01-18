@@ -1,7 +1,18 @@
+namespace: open-cluster-management-observability
+
+generatorOptions:
+ disableNameSuffixHash: true
+ labels:
+   grafana-custom-dashboard: "true"
+
 resources:
 - github.com/redhat-cop/gitops-catalog/advanced-cluster-management/instance/observability
 - custom-metrics-allowlist.yaml
-- gitops-dashboard.yaml
+
+configMapGenerator:
+- name: gitops-dashboard
+  files:
+    - gitops.json=gitops-dashboard.json
 
 patches:
   - patch: |-
