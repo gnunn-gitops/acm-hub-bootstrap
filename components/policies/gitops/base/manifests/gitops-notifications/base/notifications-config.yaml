@@ -1,0 +1,9 @@
+apiVersion: argoproj.io/v1alpha1
+kind: NotificationsConfiguration
+metadata:
+  name: slack-service
+  namespace: openshift-gitops
+spec:
+  services:
+    service.slack:
+      token: $slack-token

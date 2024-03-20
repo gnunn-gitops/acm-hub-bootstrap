@@ -1,3 +1,4 @@
+# No longer needed with NotificationsConfig introduced in 1.12
 apiVersion: v1
 kind: ConfigMap
 metadata:
