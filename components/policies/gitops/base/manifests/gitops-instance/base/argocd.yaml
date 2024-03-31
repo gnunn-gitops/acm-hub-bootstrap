@@ -270,6 +270,11 @@ spec:
         customization:
           jsonPointers:
             - /status/ingress
+      - group: cluster.open-cluster-management.io
+        kind: ManagedCluster
+        customization:
+          jsonPointers:
+            - /spec/managedClusterClientConfigs
   resourceExclusions: |
     - apiGroups:
       - tekton.dev
