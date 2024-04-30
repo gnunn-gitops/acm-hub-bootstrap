@@ -303,6 +303,11 @@ spec:
       kinds:
       - TaskRun
       - PipelineRun
+    - apiGroups:
+      - operator.tekton.dev
+      clusters:
+      - '*'
+      kinds:
       - TektonAddon
       - TektonInstallerSet
     - apiGroups:
