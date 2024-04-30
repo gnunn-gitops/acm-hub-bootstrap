@@ -303,6 +303,8 @@ spec:
       kinds:
       - TaskRun
       - PipelineRun
+      - TektonAddon
+      - TektonInstallerSet
     - apiGroups:
       - compliance.openshift.io
       kinds:
