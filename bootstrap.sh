@@ -6,7 +6,7 @@ SLEEP_SECONDS=30
 echo ""
 echo "Installing RHACM Operator."
 
-kustomize build github.com/redhat-cop/gitops-catalog/advanced-cluster-management/operator/overlays/release-2.7 | oc apply -f -
+kustomize build github.com/redhat-cop/gitops-catalog/advanced-cluster-management/operator/overlays/release-2.9 | oc apply -f -
 
 echo "Pause $SLEEP_SECONDS seconds for the creation of the rhacm-operator..."
 sleep $SLEEP_SECONDS

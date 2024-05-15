@@ -1,3 +1,2 @@
 resources:
 - notifications-config.yaml
-- notifications-secret.yaml

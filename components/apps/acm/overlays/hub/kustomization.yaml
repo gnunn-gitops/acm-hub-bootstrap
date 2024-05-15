@@ -1,5 +1,5 @@
 resources:
-- github.com/redhat-cop/gitops-catalog/advanced-cluster-management/operator/overlays/release-2.7
+- github.com/redhat-cop/gitops-catalog/advanced-cluster-management/operator/overlays/release-2.9
 - github.com/redhat-cop/gitops-catalog/advanced-cluster-management/instance/base
 
 patches:
