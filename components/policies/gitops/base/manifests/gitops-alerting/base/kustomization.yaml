@@ -1,2 +1,4 @@
+namespace: openshift-gitops
+
 resources:
 - prometheus-rules.yaml
