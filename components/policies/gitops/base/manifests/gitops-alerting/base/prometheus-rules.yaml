@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   name: argocd-additional-alerts
-  annotation:
+  annotations:
     policy.open-cluster-management.io/disable-templates: "true"
 spec:
   groups:
