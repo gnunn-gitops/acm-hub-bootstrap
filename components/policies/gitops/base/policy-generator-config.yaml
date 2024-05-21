@@ -31,6 +31,12 @@ policies:
       - path: manifests/gitops-notifications/base/
     configurationPolicyAnnotations:
       policy.open-cluster-management.io/disable-templates: "true"
+  - name: policy-gitops-alerting
+    remediationAction: enforce
+    manifests:
+      - path: manifests/gitops-alerting/base/
+    configurationPolicyAnnotations:
+      policy.open-cluster-management.io/disable-templates: "true"
   # Put ESO secrets into separate policy since it's chicken and egg
   - name: policy-gitops-secrets
     remediationAction: enforce

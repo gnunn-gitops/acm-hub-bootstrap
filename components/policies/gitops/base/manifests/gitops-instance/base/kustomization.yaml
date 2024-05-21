@@ -1,4 +1,3 @@
 resources:
 - setenv-cmp-plugin-cm.yaml
 - argocd.yaml
-- prometheus-rules.yaml
