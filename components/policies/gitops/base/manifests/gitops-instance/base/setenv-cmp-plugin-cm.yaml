@@ -4,13 +4,12 @@ metadata:
   name: setenv-cmp-plugin
   namespace: openshift-gitops
 data:
-  setenv-cmp-plugin.yaml: |
+  plugin.yaml: |
     apiVersion: argoproj.io/v1alpha1
     kind: ConfigManagementPlugin
     metadata:
       name: setenv-cmp-plugin
     spec:
-      version: v1.0
       init:
         command: [sh, -c, 'echo "Initializing setenv-plugin-cmp..."']
       generate:
