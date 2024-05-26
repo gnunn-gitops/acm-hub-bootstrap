@@ -6,8 +6,8 @@ metadata:
   labels:
     cloud: Other
     cluster.open-cluster-management.io/clusterset: default
-    clusterID: e103b035-14a4-4bb7-93aa-fecbf077b960
     gitops: local.hub
+    color: "#3E8635"
     local-cluster: "true"
     name: local-cluster
     velero.io/exclude-from-backup: "true"

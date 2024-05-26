@@ -64,6 +64,8 @@ spec:
             value: '{{ fromClusterClaim "name" }}'
           - name: SUB_DOMAIN
             value: '{{ (lookup "config.openshift.io/v1" "Ingress" "openshift-ingress" "cluster").spec.domain }}'
+          - name: COLOR
+            value: '{{ fromClusterClaim "color" }}'
         image: quay.io/gnunn/tools:latest
         imagePullPolicy: Always
         securityContext:
