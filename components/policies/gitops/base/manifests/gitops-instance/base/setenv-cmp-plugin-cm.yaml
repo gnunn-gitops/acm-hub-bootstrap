@@ -4,7 +4,7 @@ metadata:
   name: setenv-cmp-plugin
   namespace: openshift-gitops
 data:
-  plugin.yaml: |
+  setenv-cmp-plugin.yaml: |
     apiVersion: argoproj.io/v1alpha1
     kind: ConfigManagementPlugin
     metadata:

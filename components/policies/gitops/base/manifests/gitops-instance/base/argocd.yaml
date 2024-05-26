@@ -49,7 +49,7 @@ spec:
     enabled: true
   repo:
     sidecarContainers:
-      - name: setenv-plugin
+      - name: setenv-cmp-plugin
         command: [/var/run/argocd/argocd-cmp-server]
         env:
           - name: KUSTOMIZE_PLUGIN_HOME
