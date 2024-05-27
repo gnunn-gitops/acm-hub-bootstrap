@@ -7,7 +7,7 @@ metadata:
     cloud: Other
     cluster.open-cluster-management.io/clusterset: default
     gitops: local.hub
-    color: "#3E8635"
+    color: "3E8635"
     local-cluster: "true"
     name: local-cluster
     velero.io/exclude-from-backup: "true"
