@@ -9,6 +9,8 @@ placementBindingDefaults:
   name: "binding-policy-gitops"
 policies:
   - name: policy-eso-secret-store
+    configurationPolicyAnnotations:
+      apps.open-cluster-management.io/reconcile-option: replace
     manifests:
       - path: manifests/eso/base/
   - name: policy-gitops-subscription
