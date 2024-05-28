@@ -7,7 +7,7 @@ metadata:
     cloud: Other
     cluster.open-cluster-management.io/clusterset: dev
     gitops: local.home
-    color: "#0066CC"
+    color: "0066CC"
     name: home
     vendor: OpenShift
   name: home
