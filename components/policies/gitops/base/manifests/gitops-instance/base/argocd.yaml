@@ -67,7 +67,7 @@ spec:
           - name: BASE_DOMAIN
             value: '{{ (lookup "config.openshift.io/v1" "DNS" "" "cluster").spec.baseDomain }}'
           - name: COLOR
-            value: '{{ fromClusterClaim "color" }}'
+            value: '{{ default "0066CC" (fromClusterClaim "color") }}'
         image: quay.io/gnunn/tools:latest
         imagePullPolicy: Always
         securityContext:
