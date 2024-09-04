@@ -153,11 +153,16 @@ spec:
           if obj.status.conditions ~= nil then
             numDegraded = 0
             numPending = 0
+            numSuspended = 0
             msg = ""
             for i, condition in pairs(obj.status.conditions) do
-              msg = msg .. i .. ": " .. condition.type .. " | " .. condition.status .. "\n"
+              msg = msg .. i .. ": " .. condition.type .. " | " .. condition.status .. " | " .. condition.reason .. "\n"
               if condition.type == "InstallPlanPending" and condition.status == "True" then
-                numPending = numPending + 1
+                if condition.reason == "RequiresApproval" then
+                  numSuspended = numSuspended + 1
+                else
+                  numPending = numPending + 1
+                end
               elseif (condition.type == "InstallPlanMissing" and condition.reason ~= "ReferencedInstallPlanNotFound") then
                 numDegraded = numDegraded + 1
               elseif (condition.type == "CatalogSourcesUnhealthy" or condition.type == "InstallPlanFailed") and condition.status == "True" then
@@ -166,16 +171,20 @@ spec:
                 numDegraded = numDegraded + 1
               end
             end
-            if numDegraded == 0 and numPending == 0 then
-              health_status.status = "Healthy"
+            if numDegraded > 0 then
+              health_status.status = "Degraded"
               health_status.message = msg
               return health_status
-            elseif numPending > 0 and numDegraded == 0 then
+            elseif numSuspended > 0 then
+              health_status.status = "Suspended"
+              health_status.message = "Requires Approval"
+              return health_status
+            elseif numPending > 0 then
               health_status.status = "Progressing"
               health_status.message = "An install plan for a subscription is pending installation"
               return health_status
             else
-              health_status.status = "Degraded"
+              health_status.status = "Healthy"
               health_status.message = msg
               return health_status
             end
