@@ -194,6 +194,14 @@ spec:
               hs.status = "Healthy"
               hs.message = obj.status.phase
               return hs
+            elseif obj.status.phase == "RequiresApproval" then
+              hs.status = "Suspended"
+              hs.message = obj.status.phase
+              return hs
+            else
+              hs.status = "Progressing"
+              hs.message = obj.status.phase
+              return hs
             end
           end
         end
