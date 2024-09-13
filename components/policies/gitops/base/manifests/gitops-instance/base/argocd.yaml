@@ -145,6 +145,30 @@ spec:
           end
         end
         return hs
+    - group: argoproj.io
+      kind: RolloutManager
+      check: |
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.conditions ~= nil then
+            for _, condition in ipairs(obj.status.conditions) do
+              hs.message = condition.message
+              break
+            end
+          end
+          if obj.status.phase ~= nil then
+            if obj.status.phase == "Failure" then
+              hs.status = "Degraded"
+              return hs
+            elseif obj.status.phase == "Available" then
+              hs.status = "Healthy"
+              return hs
+            elseif obj.status.phase == "Pending" then
+              hs.status = "Progressing"
+              return hs
+            end
+          end
+        end
     - group: operators.coreos.com
       kind: Subscription
       check: |

@@ -40,10 +40,11 @@ policies:
     configurationPolicyAnnotations:
       policy.open-cluster-management.io/disable-templates: "true"
   # Put ESO secrets into separate policy since it's chicken and egg
-  - name: policy-gitops-secrets
-    remediationAction: enforce
-    manifests:
-      - path: manifests/gitops-secrets/base/
+  # Not being used since I have a global policy that does this but included for example
+  # - name: policy-gitops-secrets
+  #   remediationAction: enforce
+  #   manifests:
+  #     - path: manifests/gitops-secrets/base/
 policySets:
   - name: "gitops"
     description: "Policy for bootstrapping cluster with gitops"
