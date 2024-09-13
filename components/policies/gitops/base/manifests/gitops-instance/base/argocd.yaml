@@ -168,6 +168,9 @@ spec:
               return hs
             end
           end
+          hs.status = "Progressing"
+          hs.message = "Waiting for operator to update status"
+          return hs
         end
     - group: operators.coreos.com
       kind: Subscription
