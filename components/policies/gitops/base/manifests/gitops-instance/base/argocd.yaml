@@ -10,6 +10,8 @@ spec:
     exec.enabled: "true"
     resource.respectRBAC: "normal"
     resource.ignoreResourceUpdatesEnabled: 'true'
+    resource.compareoptions: |
+      ignoreAggregatedRoles: true
     resource.customizations.ignoreResourceUpdates.external-secrets.io_ExternalSecret: |
       jsonPointers:
       - /status/refreshTime
