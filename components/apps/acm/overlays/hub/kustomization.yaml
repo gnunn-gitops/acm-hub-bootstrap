@@ -6,7 +6,7 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/channel
-        value: 'release-2.11'
+        value: 'release-2.12'
     target:
       kind: Subscription
       name: advanced-cluster-management
