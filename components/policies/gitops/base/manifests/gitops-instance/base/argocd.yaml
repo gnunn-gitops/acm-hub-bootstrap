@@ -41,6 +41,8 @@ spec:
     clientSecret: $oidc.keycloak.clientSecret
     requestedScopes: ["openid", "profile", "email", "groups"]
   controller:
+    extraCommandArgs:
+      - '--persist-resource-health=false'
     resources:
       limits:
         memory: 4Gi
