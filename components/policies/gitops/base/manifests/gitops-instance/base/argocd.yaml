@@ -187,7 +187,7 @@ spec:
             numSuspended = 0
             msg = ""
             for i, condition in pairs(obj.status.conditions) do
-              msg = msg .. i .. ": " .. condition.type .. " | " .. condition.status .. " | " .. condition.reason .. "\n"
+              msg = msg .. i .. ": " .. condition.type .. " | " .. condition.status .. " | " .. (condition.reason and condition.reason or '') .. "\n"
               if condition.type == "InstallPlanPending" and condition.status == "True" then
                 if condition.reason == "RequiresApproval" then
                   numSuspended = numSuspended + 1
@@ -201,7 +201,7 @@ spec:
               elseif (condition.type == "ResolutionFailed" and condition.reason ~= "ConstraintsNotSatisfiable") then
                 numDegraded = numDegraded + 1
               elseif (condition.type == 'ChannelDeprecated' and condition.status == "True") then
-                numDegraded - numDegraded + 1
+                numDegraded = numDegraded + 1
               end
             end
             if numDegraded > 0 then
@@ -210,7 +210,7 @@ spec:
               return health_status
             elseif numSuspended > 0 then
               health_status.status = "Suspended"
-              health_status.message = "Requires Approval"
+              health_status.message = msg
               return health_status
             elseif numPending > 0 then
               health_status.status = "Progressing"
