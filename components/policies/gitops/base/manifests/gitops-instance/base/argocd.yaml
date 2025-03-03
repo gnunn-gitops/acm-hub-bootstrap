@@ -200,6 +200,8 @@ spec:
                 numDegraded = numDegraded + 1
               elseif (condition.type == "ResolutionFailed" and condition.reason ~= "ConstraintsNotSatisfiable") then
                 numDegraded = numDegraded + 1
+              elseif (condition.type == 'ChannelDeprecated' and condition.status == "True") then
+                numDegraded - numDegraded + 1
               end
             end
             if numDegraded > 0 then
