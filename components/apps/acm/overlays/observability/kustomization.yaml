@@ -17,6 +17,13 @@ configMapGenerator:
 patches:
   - patch: |-
       - op: replace
+        path: /spec/objectBucketName
+        value: obc-open-cluster-management-observability-acm-observability
+    target:
+      kind: ObjectBucketClaim
+      name: acm-observability
+  - patch: |-
+      - op: replace
         path: /spec/storageConfig/storageClass
         value: lvms-vg1
       - op: replace
