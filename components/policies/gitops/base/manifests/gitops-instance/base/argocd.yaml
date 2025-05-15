@@ -33,6 +33,17 @@ spec:
       - /metadata/resourceVersion
     accounts.admin: apiKey, login
     ui.cssurl: 'https://gnunn-gitops.github.io/cluster-config/themes/{{ fromClusterClaim "gitops" }}/custom-cluster.css'
+    # extension proxy to connect to lightspeed
+    extension.config.lightspeed: |
+      connectionTimeout: 2s
+      keepAlive: 360s
+      idleConnectionTimeout: 360s
+      maxIdleConnections: 30
+      services:
+      - url: https://lightspeed-app-server.openshift-lightspeed.svc.cluster.local:8443
+        headers:
+        - name: Authorization
+          value: '$lightspeed.auth.header'
   kustomizeBuildOptions: "--enable-helm --enable-alpha-plugins"
   oidcConfig: |
     name: Keycloak
@@ -106,13 +117,40 @@ spec:
         cpu: 250m
         memory: 256Mi
   server:
+    extraCommandArgs:
+      - "--enable-proxy-extension"
+    initContainers:
+      - env:
+          - name: EXTENSION_URL
+            value: "https://github.com/gnunn-gitops/argocd-lightspeed/releases/download/0.3.0/extension-lightspeed-0.3.0.tar"
+        image: "quay.io/argoprojlabs/argocd-extension-installer:v0.0.8"
+        name: extension-lightspeed
+        securityContext:
+          allowPrivilegeEscalation: false
+        volumeMounts:
+          - name: extensions
+            mountPath: /tmp/extensions/
     insecure: true
     # host: 'openshift-gitops-server-openshift-gitops.{{ (lookup "config.openshift.io/v1" "Ingress" "openshift-ingress" "cluster").spec.domain }}'
     route:
+      annotations:
+        # Needed to support longer queries to lightspeed
+        haproxy.router.openshift.io/timeout: 360s
       enabled: true
       tls:
         termination: edge
         insecureEdgeTerminationPolicy: Redirect
+    # need the service-ca to communicate directly with lightspeed service
+    volumeMounts:
+      - mountPath: /etc/pki/tls/certs/service-ca.crt
+        name: config-service-cabundle
+        subPath: service-ca.crt
+    volumes:
+      - configMap:
+          name: config-service-cabundle
+          defaultMode: 420
+        name: config-service-cabundle
+        optional: true
   notifications:
     enabled: true
   resourceActions:
