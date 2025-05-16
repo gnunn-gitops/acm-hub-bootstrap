@@ -131,7 +131,6 @@ spec:
         volumeMounts:
           - name: extensions
             mountPath: /tmp/extensions/
-    insecure: true
     # host: 'openshift-gitops-server-openshift-gitops.{{ (lookup "config.openshift.io/v1" "Ingress" "openshift-ingress" "cluster").spec.domain }}'
     route:
       annotations:
@@ -139,7 +138,7 @@ spec:
         haproxy.router.openshift.io/timeout: 360s
       enabled: true
       tls:
-        termination: edge
+        termination: reencrypt
         insecureEdgeTerminationPolicy: Redirect
     # need the service-ca to communicate directly with lightspeed service
     volumeMounts:
