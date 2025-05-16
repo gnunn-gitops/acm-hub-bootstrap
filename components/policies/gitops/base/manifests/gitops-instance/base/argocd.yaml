@@ -117,6 +117,7 @@ spec:
         cpu: 250m
         memory: 256Mi
   server:
+    enableRolloutsUI: true
     extraCommandArgs:
       - "--enable-proxy-extension"
     initContainers:
