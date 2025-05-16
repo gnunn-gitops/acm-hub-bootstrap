@@ -150,7 +150,6 @@ spec:
           name: config-service-cabundle
           defaultMode: 420
         name: config-service-cabundle
-        optional: true
   notifications:
     enabled: true
   resourceActions:
