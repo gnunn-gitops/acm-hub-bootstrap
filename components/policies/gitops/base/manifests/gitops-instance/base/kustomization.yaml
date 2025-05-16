@@ -1,6 +1,3 @@
 resources:
-- lightspeed-cluster-role-binding.yaml
-- lightspeed-auth-secret.yaml
-- lightspeed-external-secret.yaml
 - setenv-cmp-plugin-cm.yaml
 - argocd.yaml
