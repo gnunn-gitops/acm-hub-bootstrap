@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: config-service-cabundle
   annotations:
-    service.beta.openshift.io/inject-cabundle: true
+    service.beta.openshift.io/inject-cabundle: "true"
 data: {}
