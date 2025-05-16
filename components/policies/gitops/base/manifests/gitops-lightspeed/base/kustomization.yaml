@@ -1,4 +1,5 @@
 resources:
+- openshift-service-ca.yaml
 - lightspeed-cluster-role-binding.yaml
 - lightspeed-auth-secret.yaml
 - lightspeed-external-secret.yaml

@@ -147,7 +147,7 @@ spec:
         subPath: service-ca.crt
     volumes:
       - configMap:
-          name: openshift-service-ca.crt
+          name: config-service-cabundle
           defaultMode: 420
         name: config-service-cabundle
   notifications:
