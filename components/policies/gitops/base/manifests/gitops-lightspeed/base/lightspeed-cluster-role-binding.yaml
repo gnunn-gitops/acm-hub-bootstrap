@@ -8,5 +8,5 @@ roleRef:
   name: lightspeed-operator-query-access
 subjects:
 - kind: ServiceAccount
-  name: openshift-gitops-openshift-gitops-application-controller
+  name: openshift-gitops-argocd-application-controller
   namespace: gitops
