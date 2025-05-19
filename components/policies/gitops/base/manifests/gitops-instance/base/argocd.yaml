@@ -423,4 +423,5 @@ spec:
       p, role:none, *, *, */*, deny
       g, system:cluster-admins, role:admin
       g, cluster-admins, role:admin
+      p, role:readonly, extensions, invoke, lightspeed, allow
     scopes: "[groups]"
