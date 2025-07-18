@@ -350,22 +350,19 @@ spec:
     - kind: PersistentVolumeClaim
       check: |
         hs = {}
-        if obj.status ~= nil then
-          if obj.status.phase ~= nil then
-            if obj.status.phase == "Pending" then
-              hs.status = "Healthy"
-              hs.message = obj.status.phase
-              return hs
+        if (obj.status ~= nil and obj.status.phase ~= nil) then
+            if obj.status.phase == "Pending" or obj.status.phase == "Bound" then
+                hs.status = "Healthy"
+                hs.message = obj.status.phase
+                return hs
+            elseif obj.status.phase == "Lost" then
+                hs.status = "Degraded"
+                hs.message = obj.status.phase
+                return hs
             end
-            if obj.status.phase == "Bound" then
-              hs.status = "Healthy"
-              hs.message = obj.status.phase
-              return hs
-            end
-          end
         end
-        hs.status = "Progressing"
-        hs.message = "Waiting for PVC"
+        hs.status = "Unknown"
+        hs.message = "Waiting for PVC status"
         return hs
   resourceIgnoreDifferences:
     resourceIdentifiers:
