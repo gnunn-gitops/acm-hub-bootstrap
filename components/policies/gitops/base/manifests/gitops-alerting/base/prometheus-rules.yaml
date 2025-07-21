@@ -29,3 +29,10 @@ spec:
       for: 10m
       labels:
         severity: warning
+    - alert: ArgoCDSyncUnknown
+      annotations:
+        message: ArgoCD application {{ $labels.name }} is sync status is Unknown
+      expr: argocd_app_info{namespace="openshift-gitops", sync_status="Unknown"}
+      for: 5m
+      labels:
+        severity: critical
