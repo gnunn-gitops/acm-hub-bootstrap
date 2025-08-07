@@ -149,6 +149,8 @@ spec:
           name: config-service-cabundle
           defaultMode: 420
         name: config-service-cabundle
+      - name: extensions
+        emptyDir: {}  
   notifications:
     enabled: true
   resourceActions:
