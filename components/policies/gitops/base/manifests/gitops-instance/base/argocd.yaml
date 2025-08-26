@@ -150,7 +150,7 @@ spec:
           defaultMode: 420
         name: config-service-cabundle
       - name: extensions
-        emptyDir: {}  
+        emptyDir: {}
   notifications:
     enabled: true
   resourceActions:
@@ -408,11 +408,6 @@ spec:
       - policy.open-cluster-management.io
       kinds:
       - ConfigurationPolicy
-    - apiGroups:
-      - noobaa.io
-      kinds:
-      - NooBaa
-      - BucketClass
   ha:
     enabled: false
   rbac:
