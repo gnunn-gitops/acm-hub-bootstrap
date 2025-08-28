@@ -19,6 +19,9 @@ patches:
       - op: replace
         path: /spec/objectBucketName
         value: obc-open-cluster-management-observability-acm-observability
+      - op: replace
+        path: /spec/storageClassName
+        value: noobaa.noobaa.io
     target:
       kind: ObjectBucketClaim
       name: acm-observability
