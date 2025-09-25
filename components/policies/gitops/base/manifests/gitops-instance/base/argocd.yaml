@@ -33,8 +33,8 @@ spec:
       - /metadata/resourceVersion
     accounts.admin: apiKey, login
     ui.cssurl: 'https://gnunn-gitops.github.io/cluster-config/themes/{{ fromClusterClaim "gitops" }}/custom-cluster.css'
-    # extension proxy to connect to lightspeed
-    extension.config.lightspeed: |
+    # extension proxy to connect to lightspeed backend from assistant
+    extension.config.assistant: |
       connectionTimeout: 2s
       keepAlive: 360s
       idleConnectionTimeout: 360s
@@ -123,9 +123,19 @@ spec:
     initContainers:
       - env:
           - name: EXTENSION_URL
-            value: "https://github.com/gnunn-gitops/argocd-lightspeed/releases/download/0.5.0/extension-lightspeed-0.5.0.tar"
+            value: "https://github.com/argoproj-labs/assistant-for-argocd/releases/download/v0.2.1/extension-assistant-0.2.1.tar"
         image: "quay.io/argoprojlabs/argocd-extension-installer:v0.0.8"
-        name: extension-lightspeed
+        name: extension-assistant
+        securityContext:
+          allowPrivilegeEscalation: false
+        volumeMounts:
+          - name: extensions
+            mountPath: /tmp/extensions/
+      - env:
+          - name: EXTENSION_URL
+            value: "https://github.com/gnunn-gitops/argocd-assistant-settings/releases/download/0.1/assistant-lightspeed-settings-0.1.tar"
+        image: "quay.io/argoprojlabs/argocd-extension-installer:v0.0.8"
+        name: extension-assistant-settings
         securityContext:
           allowPrivilegeEscalation: false
         volumeMounts:
@@ -462,5 +472,5 @@ spec:
       p, role:none, *, *, */*, deny
       g, system:cluster-admins, role:admin
       g, cluster-admins, role:admin
-      p, role:readonly, extensions, invoke, lightspeed, allow
+      p, role:readonly, extensions, invoke, assistant, allow
     scopes: "[groups]"
