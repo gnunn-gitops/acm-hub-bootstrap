@@ -129,7 +129,7 @@ spec:
         securityContext:
           allowPrivilegeEscalation: false
         volumeMounts:
-          - name: extensions
+          - name: rollout-extensions
             mountPath: /tmp/extensions/
       - env:
           - name: EXTENSION_URL
@@ -139,7 +139,7 @@ spec:
         securityContext:
           allowPrivilegeEscalation: false
         volumeMounts:
-          - name: extensions
+          - name: rollout-extensions
             mountPath: /tmp/extensions/
     route:
       annotations:
