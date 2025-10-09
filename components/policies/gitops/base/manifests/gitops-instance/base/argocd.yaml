@@ -6,6 +6,11 @@ metadata:
 spec:
   resourceTrackingMethod: annotation
   applicationSet: {}
+  localUsers:
+    - enabled: true
+      apiKey: true
+      name: mcp-for-argocd
+      tokenLifetime: "0"
   extraConfig:
     exec.enabled: "true"
     resource.respectRBAC: "normal"
@@ -473,4 +478,5 @@ spec:
       g, system:cluster-admins, role:admin
       g, cluster-admins, role:admin
       p, role:readonly, extensions, invoke, assistant, allow
+      g, mcp-for-argocd. role:readonly
     scopes: "[groups]"
