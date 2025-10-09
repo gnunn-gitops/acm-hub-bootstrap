@@ -478,5 +478,5 @@ spec:
       g, system:cluster-admins, role:admin
       g, cluster-admins, role:admin
       p, role:readonly, extensions, invoke, assistant, allow
-      g, mcp-for-argocd. role:readonly
+      g, mcp-for-argocd, role:readonly
     scopes: "[groups]"
